@@ -1,0 +1,24 @@
+services:
+  uoapp-db:
+    hostname: localhost
+    image: mongo:7.0.11
+    restart: always
+    container_name: ${DATABASE_NAME}
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DATABASE_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - '${DATABASE_EXTERNAL_PORT}:${DATABASE_INTERNAL_PORT}'
+    volumes:
+      - ./${DATABASE_NAME}:/data/db
+  uoapp-redis-db:
+    container_name: uoapp-redis-db
+    image: redis:7
+    ports:
+      - '${REDIS_EXTERNAL_PORT}:${REDIS_INTERNAL_PORT}'
+    volumes:
+      - ./uoapp-redis-db:/data
+volumes:
+  uoapp-redis-db:
+  uoapp-db:
+#TODO: Add everything related to Healthcheck.

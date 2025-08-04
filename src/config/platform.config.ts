@@ -1,0 +1,10 @@
+import { registerAs } from '@nestjs/config';
+
+export default registerAs('platform', () => ({
+  PLATFORM_BASE_URL: process.env.PLATFORM_BASE_URL,
+  OWN_PLATFORM_ALIAS: process.env.OWN_PLATFORM_ALIAS,
+  FRONTEND_CLIENT_BASE_URL: process.env.FRONTEND_CLIENT_BASE_URL,
+  FRONTEND_CLIENT_KEYCLOAK_ID: process.env.FRONTEND_CLIENT_KEYCLOAK_ID,
+  FRONTEND_CLIENT_EMAIL: process.env.FRONTEND_CLIENT_EMAIL,
+  FRONTEND_CLIENT_FORGOT_URL: process.env.FRONTEND_CLIENT_FORGOT_URL,
+}));
