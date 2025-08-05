@@ -1,0 +1,136 @@
+{
+  "_id": "33de960c-b360-440d-8bb9-4b34979c045a",
+  "name": "Keycloak",
+  "alias": "keycloak",
+  "description": "Keycloak service",
+  "tenant": "MNX-Online",
+  "technology": "Identity Manager",
+  "externalIds": {},
+  "baseURL": "{{AUTH_BASE_URL}}",
+  "configuration": {
+    "isActive": true,
+    "servicesEntrypoints": [
+      {
+        "action": "registerUser",
+        "method": "POST",
+        "endpointPath": "/admin/realms/{{noCompile '{{realmName}}'}}/users",
+        "params": {}
+      },
+      {
+        "action": "deleteUser",
+        "method": "DELETE",
+        "endpointPath": "/admin/realms/{{noCompile '{{realmName}}'}}/users/{{noCompile '{{userId}}'}}",
+        "params": {}
+      },
+      {
+        "action": "getToken",
+        "method": "POST",
+        "endpointPath": "/realms/{{noCompile '{{realmName}}'}}/protocol/openid-connect/token",
+        "params": {}
+      },
+      {
+        "action": "logout",
+        "method": "POST",
+        "endpointPath": "/realms/{{noCompile '{{realmName}}'}}/protocol/openid-connect/logout",
+        "params": {}
+      },
+      {
+        "action": "introspectToken",
+        "method": "POST",
+        "endpointPath": "/realms/{{noCompile '{{realmName}}'}}/protocol/openid-connect/token/introspect",
+        "params": {}
+      },
+
+      {
+        "action": "addRolesToUser",
+        "method": "POST",
+        "endpointPath": "/admin/realms/{{noCompile '{{realmName}}'}}/users/{{noCompile '{{userId}}'}}/role-mappings/clients/{{noCompile '{{clientId}}'}}",
+        "params": {}
+      },
+      {
+        "action": "removeRolesFromUser",
+        "method": "DELETE",
+        "endpointPath": "/admin/realms/{{noCompile '{{realmName}}'}}/users/{{noCompile '{{userId}}'}}/role-mappings/clients/{{noCompile '{{clientId}}'}}",
+        "params": {}
+      },
+      {
+        "action": "getClientRoles",
+        "method": "GET",
+        "endpointPath": "/admin/realms/{{noCompile '{{realmName}}'}}/clients/{{noCompile '{{clientId}}'}}/roles",
+        "params": {}
+      },
+      {
+        "action": "createClientRole",
+        "method": "POST",
+        "endpointPath": "/admin/realms/{{noCompile '{{realmName}}'}}/clients/{{noCompile '{{clientId}}'}}/roles",
+        "params": {}
+      },
+      {
+        "action": "createResource",
+        "method": "POST",
+        "endpointPath": "/admin/realms/{{noCompile '{{realmName}}'}}/clients/{{noCompile '{{clientId}}'}}/authz/resource-server/resource",
+        "params": {}
+      },
+      {
+        "action": "getResources",
+        "method": "GET",
+        "endpointPath": "/admin/realms/{{noCompile '{{realmName}}'}}/clients/{{noCompile '{{clientId}}'}}/authz/resource-server/resource",
+        "params": {}
+      },
+      {
+        "action": "createPolicy",
+        "method": "POST",
+        "endpointPath": "/admin/realms/{{noCompile '{{realmName}}'}}/clients/{{noCompile '{{clientId}}'}}/authz/resource-server/policy/role",
+        "params": {}
+      },
+      {
+        "action": "getClientPolicy",
+        "method": "GET",
+        "endpointPath": "/admin/realms/{{noCompile '{{realmName}}'}}/clients/{{noCompile '{{clientId}}'}}/authz/resource-server/policy",
+        "params": {}
+      },
+      {
+        "action": "createPermission",
+        "method": "POST",
+        "endpointPath": "/admin/realms/{{noCompile '{{realmName}}'}}/clients/{{noCompile '{{clientId}}'}}/authz/resource-server/permission",
+        "params": {}
+      },
+      {
+        "action": "getClientPermissions",
+        "method": "GET",
+        "endpointPath": "/admin/realms/{{noCompile '{{realmName}}'}}/clients/{{noCompile '{{clientId}}'}}/authz/resource-server/permission",
+        "params": {}
+      },
+      {
+        "action": "getClientSessions",
+        "method": "GET",
+        "endpointPath": "/admin/realms/{{noCompile '{{realmName}}'}}/users/{{noCompile '{{userId}}'}}/sessions",
+        "params": {}
+      },
+      {
+        "action": "deleteSession",
+        "method": "DELETE",
+        "endpointPath": "/admin/realms/{{noCompile '{{realmName}}'}}/sessions/{{noCompile '{{sessionId}}'}}",
+        "params": {}
+      },
+      {
+        "action": "getUsers",
+        "method": "GET",
+        "endpointPath": "/admin/realms/{{noCompile '{{realmName}}'}}/users",
+        "params": {}
+      },
+      {
+        "action": "getScopes",
+        "method": "GET",
+        "endpointPath": "/admin/realms/{{noCompile '{{realmName}}'}}/clients/{{noCompile '{{clientId}}'}}/authz/resource-server/scope",
+        "params": {}
+      },
+      {
+        "action": "createScope",
+        "method": "POST",
+        "endpointPath": "/admin/realms/{{noCompile '{{realmName}}'}}/clients/{{noCompile '{{clientId}}'}}/authz/resource-server/scope",
+        "params": {}
+      }
+    ]
+  }
+}

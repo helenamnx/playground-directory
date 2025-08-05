@@ -1,0 +1,60 @@
+{
+  "Users": {
+    "resourceName": "Users",
+    "scopes": {
+      "users:create": ["administrator"],
+      "users:moderate": ["administrator"],
+      "users:update-own-profile": ["administrator", "socio", "examenes"],
+      "users:view-all": ["administrator"],
+      "users:view-own": ["administrator", "socio", "examenes"]
+    }
+  },
+  "Exams": {
+    "resourceName": "Exams",
+    "scopes": {
+      "exam:create": ["administrator"],
+      "exam:view-all": ["administrator", "socio", "examenes"],
+      "exam:exam-attempts:create": ["socio", "examenes"],
+      "exam:exam-attempts:update-own-attempt": ["socio", "examenes"],
+      "exam:exam-attempts:view-own-attempt": ["socio", "examenes"],
+      "exam:exam-attempts:view-all": ["administrator"],
+      "exam:exam-attempts:history:view-own-history": ["socio", "examenes"],
+      "exam:exam-attempts:history:view-all": ["administrator"]
+    }
+  },
+  "Questions": {
+    "resourceName": "Questions",
+    "scopes": {
+      "questions:create": ["administrator"],
+      "questions:view-all": ["administrator", "socio", "examenes"],
+      "questions:update": ["administrator"]
+    }
+  },
+  "Topics": {
+    "resourceName": "Topics",
+    "scopes": {
+      "topics:create": ["administrator"],
+      "topics:view-all": ["administrator", "socio", "examenes"],
+      "topics:update": ["administrator"]
+    }
+  },
+  "Information": {
+    "resourceName": "Information",
+    "scopes": {
+      "information:create": ["administrator"],
+      "information:view-all": ["administrator", "socio", "examenes"],
+      "information:update": ["administrator"]
+    }
+  },
+  "Clients": {
+    "resourceName": "Clients",
+    "scopes": {
+      "clients:create": ["administrator"],
+      "clients:view-all": ["administrator", "socio", "examenes"],
+      "clients:update": ["administrator"],
+      "clients:information:create": ["administrator"],
+      "clients:information:view-all": ["administrator", "socio", "examenes"],
+      "clients:information:update": ["administrator"]
+    }
+  }
+}

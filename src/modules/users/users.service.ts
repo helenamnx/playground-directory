@@ -9,12 +9,15 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './schemas/user.schema';
 import { HistoryService } from '../history/history.service';
+import { UserRolesService } from '../user-roles/user-roles.service';
+import { UserRole } from '../user-roles/schemas/user-role.schemas';
 
 @Injectable()
 export class UsersService extends CRUDService<User> {
   constructor(
     @InjectModel(User.name) private userModel: Model<User>,
     private readonly userConfigurationsService: UserConfigurationsService,
+    private readonly userRolesService: UserRolesService,
     private readonly historyService: HistoryService,
   ) {
     super(userModel);
@@ -23,11 +26,20 @@ export class UsersService extends CRUDService<User> {
   async createUser(createUserDto: CreateUserDto) {
     const startTime = new Date();
     try {
+      const {
+        roles,
+        email,
+        username,
+        configuration,
+        externalIds,
+        displayName,
+      } = createUserDto;
+      if (roles?.length > 0) {
+        await this.userRolesService.findRoles(roles);
+      }
       const storedUser = await super.findOne({
         filterOptions: {
-          $or: [
-            { username: createUserDto.username, email: createUserDto.email },
-          ],
+          $or: [{ username: username, email: email }],
         },
         triggerError: false,
       });
@@ -35,25 +47,26 @@ export class UsersService extends CRUDService<User> {
         throw new ConflictCustomResponse({
           title: 'User already exists',
           key: CustomErrorKeys.USER_ALREADY_EXISTS,
-          detail: 'User with username or email already exists',
+          detail: `User with username or email already exists: username: ${username}, email: ${email}`,
         });
       }
       //TODO: hashear password
       const newUserConfiguration =
-        await this.userConfigurationsService.createConfiguration(
-          createUserDto.configuration,
-        );
+        await this.userConfigurationsService.createConfiguration(configuration);
       const newUser = await super.create({
         ...createUserDto,
         configuration: newUserConfiguration._id,
+        alias: email,
+        displayName: displayName || email,
       });
-      await this.historyService.createHistory(newUser);
+      // await this.historyService.createHistory(newUser);
 
       return newUser;
     } catch (e) {
-      await this.historyService.errorHistory({
-        errorMessage: e.message,
-      });
+      // await this.historyService.errorHistory({
+      //   errorMessage: e.message,
+      // });
+      console.log(e);
       throw e;
     }
   }
@@ -68,8 +81,19 @@ export class UsersService extends CRUDService<User> {
     return updatedUser;
   }
 
-
-  async checkIfUserAlreadyExists(email: string, username: string) {
+  /**
+   * @description This function return an user if the provided email or username exists.
+   * @author Damian
+   * @date 13/06/2025
+   * @param {string} email
+   * @param {string} username
+   * @returns {*}
+   * @memberof UsersService
+   */
+  async checkIfUserAlreadyExists(
+    email: string,
+    username: string,
+  ): Promise<User | undefined> {
     const storedUser = await super.findOne({
       filterOptions: {
         $or: [{ username: username, email: email }],
@@ -77,5 +101,46 @@ export class UsersService extends CRUDService<User> {
       triggerError: false,
     });
     return storedUser;
+  }
+
+  /**
+   * @description This function add roles to an user
+   * @author Damian
+   * @date 13/06/2025
+   * @param {User} user
+   * @param {UserRole['_id'][]} roles
+   * @memberof UsersService
+   */
+  async addRolesToUser(userId: User['_id'], roles: UserRole['_id'][]) {
+    const storedRoles = await this.userRolesService.findRoles(roles);
+    await super.update(userId, {
+      $addToSet: {
+        roles: storedRoles.map((role) => role._id),
+      },
+    });
+  }
+
+  async getUserRoles(userId: User['_id']) {
+    const storedUser = await super.findOne({
+      filterOptions: {
+        _id: userId,
+      },
+      populateOptions: [
+        {
+          path: 'roles',
+          select: ['-history'],
+        },
+      ],
+    });
+    return storedUser.roles;
+  }
+
+  async updateUserRoles(userId: User['_id'], roles: UserRole['_id'][]) {
+    const storedRoles = await this.userRolesService.findRoles(roles);
+    await super.update(userId, {
+      $set: {
+        roles: storedRoles.map((role) => role._id),
+      },
+    });
   }
 }

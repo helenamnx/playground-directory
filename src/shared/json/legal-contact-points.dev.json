@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Asistencia en expediente disciplinario",
+    "email": "damian@mnxonline.com",
+    "cc": ["joel@mnxonline.com"]
+  },
+  {
+    "name": "Confección de recursos no judiciales",
+    "email": "damian@mnxonline.com",
+    "cc": ["joel@mnxonline.com"]
+  },
+  {
+    "name": "Revisión y asesoramiento sobre instancias",
+    "email": "damian@mnxonline.com",
+    "cc": ["joel@mnxonline.com"]
+  },
+  {
+    "name": "Contencioso administrativo",
+    "email": "joel@mnxonline.com",
+    "cc": ["damian@mnxonline.com"]
+  },
+  {
+    "name": "Reclamación por sanción disciplinaria de haberes, suspensión de funciones o pérdida de destino",
+    "email": "joel@mnxonline.com",
+    "cc": ["damian@mnxonline.com"]
+  },
+  {
+    "name": "Compensación por condena en costas judiciales",
+    "email": "joel@mnxonline.com",
+    "cc": ["damian@mnxonline.com"]
+  },
+  {
+    "name": "Asistencia Penal",
+    "email": "joel@mnxonline.com",
+    "cc": ["damian@mnxonline.com"]
+  },
+  {
+    "name": "Asistencia Orden Social",
+    "email": "damian@mnxonline.com",
+    "cc": ["joel@mnxonline.com"]
+  }
+]

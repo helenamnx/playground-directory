@@ -24,7 +24,7 @@ export class InformationContentController {
 
   @Get()
   findAll() {
-    return this.informationContentService.findAll();
+    return this.informationContentService.findAllInformationContent();
   }
 
   @Get(':id')

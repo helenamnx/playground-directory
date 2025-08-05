@@ -15,10 +15,10 @@ export const createVitestTestConfig = (testingType: string): InlineConfig => {
     },
     setupFiles: './test/utils/setup-file.util.ts',
     env: loadEnv('test', process.cwd(), ''),
-    reporters: ['verbose', 'html'],
+    reporters: ['verbose'],
     coverage: {
       provider: 'istanbul',
-      reporter: ['text', 'json', 'html'],
+      reporter: ['text', 'json'],
       reportsDirectory: `coverage/${testingType}`,
       include: ['src/**/*.ts'],
     },

@@ -28,4 +28,7 @@ export class AssingClientToPlatformDto {
   @ValidateNested()
   @Type(() => CreateClientConfigurationDto)
   configuration: CreateClientConfigurationDto;
+
+  @IsOptional()
+  organization?: string;
 }

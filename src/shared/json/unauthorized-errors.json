@@ -1,0 +1,7 @@
+{
+  "MISSING_CLIENT_CREDENTIALS": {
+    "title": "Missing client credentials",
+    "detail": "Missing client credentials",
+    "key": "MISSING_CLIENT_CREDENTIALS"
+  }
+}

@@ -1,0 +1,195 @@
+[
+  {
+    "code": "test-10",
+    "value": "Test 10",
+    "parentCategories": [],
+    "scope": "79646b8a-10da-4393-96ee-395f9b6d1b22",
+    "configuration": {
+      "highlighted": false,
+      "maxScore": 10,
+      "numberOfQuestions": 10,
+      "showAnswers": true,
+      "passingScore": 5,
+      "negativeMarking": 0.33,
+      "maxTopics": 1,
+      "canAutogenerate": true
+    },
+    "isActive": true,
+    "title": {
+      "es": "Test 10",
+      "en": "Test 10"
+    },
+    "description": {
+      "es": "Descripción del test 10",
+      "en": "Test 10"
+    },
+    "tags": []
+  },
+  {
+    "code": "test-20",
+    "value": "Test 20",
+    "parentCategories": [],
+    "scope": "79646b8a-10da-4393-96ee-395f9b6d1b22",
+    "configuration": {
+      "highlighted": false,
+      "maxScore": 10,
+      "showAnswers": true,
+      "numberOfQuestions": 20,
+      "passingScore": 5,
+      "negativeMarking": 0.33,
+      "maxTopics": 1,
+      "canAutogenerate": true
+    },
+    "isActive": true,
+    "title": {
+      "es": "Test 20",
+      "en": "Test 20"
+    },
+    "description": {
+      "es": "Descripción del test 20",
+      "en": "Test 20"
+    },
+    "tags": []
+  },
+  {
+    "code": "simulacro",
+    "value": "Simulacro",
+    "parentCategories": [],
+    "scope": "79646b8a-10da-4393-96ee-395f9b6d1b22",
+    "configuration": {
+      "highlighted": true,
+      "maxScore": 10,
+      "numberOfQuestions": 100,
+      "passingScore": 5,
+      "duration": 7200000,
+      "isTimerEnabled": true,
+      "timed": true,
+      "showAnswers": false,
+      "negativeMarking": 0.33,
+      "canAutogenerate": true
+    },
+    "isActive": true,
+    "title": {
+      "es": "Simulacro",
+      "en": "Simulation"
+    },
+    "description": {
+      "es": "Descripción del simulacro",
+      "en": "Simulation"
+    },
+    "tags": []
+  },
+  {
+    "code": "examen-repaso",
+    "value": "Examen repaso",
+    "parentCategories": [],
+    "scope": "79646b8a-10da-4393-96ee-395f9b6d1b22",
+    "configuration": {
+      "highlighted": true,
+      "maxScore": 10,
+      "numberOfQuestions": 100,
+      "isTimerEnabled": true,
+      "showAnswers": false,
+      "timed": true,
+      "passingScore": 5,
+      "maxAttempts": 1,
+      "duration": 7200000,
+      "negativeMarking": 0.33,
+      "canAutogenerate": false
+    },
+    "isActive": true,
+    "title": {
+      "es": "Examen repaso",
+      "en": "Practical exam"
+    },
+    "description": {
+      "es": "Descripción del examen repaso",
+      "en": "Examen repaso"
+    },
+    "tags": []
+  },
+  {
+    "code": "fuerzas-armadas",
+    "value": "Fuerzas armadas",
+    "parentCategories": [],
+    "scope": "79646b8a-10da-4393-96ee-395f9b6d1b22",
+    "configuration": {
+      "highlighted": false,
+      "maxScore": 10,
+      "numberOfQuestions": 10,
+      "showAnswers": true,
+      "isTimerEnabled": true,
+      "timed": true,
+      "passingScore": 5,
+      "duration": 1800000,
+      "negativeMarking": 0.33,
+      "canAutogenerate": false
+    },
+    "isActive": true,
+    "title": {
+      "es": "Fuerzas armadas",
+      "en": "Armed Forces"
+    },
+    "description": {
+      "es": "Descripción de fuerzas armadas",
+      "en": "Armed Forces"
+    },
+    "tags": []
+  },
+  {
+    "code": "ejercito-de-tierra",
+    "value": "Ejército de tierra",
+    "parentCategories": [],
+    "scope": "79646b8a-10da-4393-96ee-395f9b6d1b22",
+    "configuration": {
+      "highlighted": false,
+      "maxScore": 10,
+      "numberOfQuestions": 10,
+      "isTimerEnabled": true,
+      "showAnswers": true,
+      "timed": true,
+      "passingScore": 5,
+      "duration": 1800000,
+      "negativeMarking": 0.33,
+      "canAutogenerate": false
+    },
+    "isActive": true,
+    "title": {
+      "es": "Ejército de tierra",
+      "en": "Land Army"
+    },
+    "description": {
+      "es": "Descripción de ejercito de tierra",
+      "en": "Land Army"
+    },
+    "tags": []
+  },
+  {
+    "code": "guardia-civil",
+    "value": "Guardia civil",
+    "parentCategories": [],
+    "scope": "79646b8a-10da-4393-96ee-395f9b6d1b22",
+    "configuration": {
+      "highlighted": false,
+      "maxScore": 10,
+      "numberOfQuestions": 10,
+      "isTimerEnabled": true,
+      "showAnswers": true,
+      "timed": true,
+      "passingScore": 5,
+      "duration": 1800000,
+      "negativeMarking": 0.33,
+      "canAutogenerate": false
+    },
+    "isActive": true,
+    "title": {
+      "es": "Guardia civil",
+      "en": "Civil Guard"
+    },
+    "description": {
+      "es": "Descripción de guardia civil",
+      "en": "Civil Guard"
+    },
+    "tags": []
+  }
+]

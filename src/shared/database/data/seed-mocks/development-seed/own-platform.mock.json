@@ -1,0 +1,39 @@
+{
+  "name": "mnxo-uoapp-backend",
+  "alias": "{{OWN_PLATFORM_ALIAS}}",
+  "description": "Application for the management of users and exams of the Civil Guard Officers' Union.",
+  "tenant": "MNXOnline",
+  "technology": "Uoapp",
+  "clientId": "{{OWN_PLATFORM_CLIENT_ID}}",
+  "clientSecret": "{{OWN_PLATFORM_CLIENT_SECRET}}",
+  "externalIds": {
+    "kcID": "{{OWN_PLATFORM_KEYCLOAK_ID}}"
+  },
+  "clients": ["efb8539a-4582-4576-bcaa-83c9bd56b539"],
+  "services": ["33de960c-b360-440d-8bb9-4b34979c045a"],
+  "baseURL": "{{OWN_PLATFORM_BASE_URL}}",
+  "email": "mailtest@dev.mnxonline.com",
+  "configuration": {
+    "defaultLanguage": "es",
+    "availableLanguages": ["es", "en"],
+    "isActive": true,
+    "theme": "light",
+    "menuOptions": [
+      {
+        "name": "Send Notification",
+        "method": "POST",
+        "endpoint": "/notifications/send"
+      },
+      {
+        "name": "Service Options",
+        "method": "GET",
+        "endpoint": "/platforms-configuration"
+      },
+      {
+        "name": "Update service options",
+        "method": "POST",
+        "endpoint": "/platforms-configuration/update"
+      }
+    ]
+  }
+}

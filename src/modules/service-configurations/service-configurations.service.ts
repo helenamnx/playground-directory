@@ -4,21 +4,37 @@ import { Model } from 'mongoose';
 import { ServiceConfiguration } from './schemas/service-configuration.schema';
 import { CRUDService } from 'src/config/database/CRUD/crud.service';
 import { CreateServiceConfigurationDto } from './dto/create-service-configuration.dto';
+import { ActionSpecificationsService } from '../action-specifications/action-specifications.service';
+import { ActionSpecification } from '../action-specifications/schemas/action-specification.schema';
+import { UpdateServiceConfigurationDto } from './dto/update-service-configuration.dto';
 
 @Injectable()
 export class ServiceConfigurationsService extends CRUDService<ServiceConfiguration> {
   constructor(
     @InjectModel(ServiceConfiguration.name)
     private serviceConfigurationModel: Model<ServiceConfiguration>,
+    private readonly actionsSpecificationsService: ActionSpecificationsService,
   ) {
     super(serviceConfigurationModel);
   }
   async create(createServiceConfigurationDto: CreateServiceConfigurationDto) {
     //TODO: Validation and error handling
 
-    const newServiceConfiguration = await super.create(
-      createServiceConfigurationDto,
-    );
+    let actionSpecificationsIds: string[] = [];
+    if (createServiceConfigurationDto.servicesEntrypoints) {
+      const actionSpecifications =
+        await this.actionsSpecificationsService.createActionSpecifications(
+          createServiceConfigurationDto.servicesEntrypoints,
+        );
+      actionSpecificationsIds = actionSpecifications.map(
+        (actionSpecification) => actionSpecification._id,
+      );
+    }
+
+    const newServiceConfiguration = await super.create({
+      ...createServiceConfigurationDto,
+      servicesEntrypoints: actionSpecificationsIds,
+    });
     return newServiceConfiguration;
   }
 
@@ -29,14 +45,53 @@ export class ServiceConfigurationsService extends CRUDService<ServiceConfigurati
     return serviceConfigurationStored;
   }
 
-  // update(
-  //   id: number,
-  //   updateServiceConfigurationDto: UpdateServiceConfigurationDto,
-  // ) {
-  //   return `This action updates a #${id} serviceConfiguration`;
-  // }
+  async updateServiceConfiguration(
+    updateServiceConfigurationDto: UpdateServiceConfigurationDto,
+  ) {
+    let actionSpecificationsIds: string[] = [];
+    if (updateServiceConfigurationDto.servicesEntrypoints) {
+      await Promise.all(
+        updateServiceConfigurationDto.servicesEntrypoints.map(
+          async (actionSpecification) => {
+            let storedActionSpecification =
+              await this.actionsSpecificationsService.findOne({
+                filterOptions: {
+                  action: actionSpecification.action,
+                },
+                triggerError: false,
+              });
+            if (!storedActionSpecification) {
+              const newActionSpecification =
+                await this.actionsSpecificationsService.createActionSpecifications(
+                  [actionSpecification],
+                );
+              storedActionSpecification = newActionSpecification[0];
+            } else {
+              storedActionSpecification =
+                await this.actionsSpecificationsService.update(
+                  storedActionSpecification._id,
+                  actionSpecification,
+                );
+            }
+            actionSpecificationsIds.push(storedActionSpecification._id);
+          },
+        ),
+      );
+    }
+    if (actionSpecificationsIds.length > 0) {
+      await this.update(updateServiceConfigurationDto._id, {
+        $addToSet: {
+          servicesEntrypoints: actionSpecificationsIds,
+        },
+      });
+    }
 
-  // remove(id: number) {
-  //   return `This action removes a #${id} serviceConfiguration`;
-  // }
+    const newServiceConfiguration = await super.update(
+      updateServiceConfigurationDto._id,
+      {
+        ...updateServiceConfigurationDto,
+      },
+    );
+    return newServiceConfiguration;
+  }
 }

@@ -1,0 +1,17 @@
+{
+  "title": {
+    "multipleTopics": {
+      "es": "Múltiples temas",
+      "default": "Multiple topics"
+    }
+  },
+
+  "subtitle": {
+    "es": "Temas del examen:",
+    "default": "Topics of the exam:"
+  },
+  "body": {
+    "es": "Sub-temas de la prueba :\n",
+    "default": "Child topics of the exam :\n"
+  }
+}

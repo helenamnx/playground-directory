@@ -5,6 +5,30 @@ import { Model } from 'mongoose';
 import { ActionsService } from '../actions/actions.service';
 import { History } from './schemas/history.schema';
 import { AsyncStorageService } from '@/shared/services/als/als.service';
+import {
+  ActionAgentTypesEnum,
+  ActionStatusEnum,
+} from '@/shared/enums/action.enum';
+import { AlsKeysEnum } from '@/shared/enums/als-keys.enum';
+import { RequireAtLeastOne } from '@/shared/types/utils';
+
+type CreateHistoryParams = RequireAtLeastOne<
+  {
+    entity?: any;
+    actionType?: string;
+  },
+  'entity' | 'actionType'
+>;
+
+type ErrorHistoryParams = RequireAtLeastOne<
+  {
+    entity?: any;
+    actionType?: string;
+  },
+  'entity' | 'actionType'
+> & {
+  errorMessage: string;
+};
 
 @Injectable()
 export class HistoryService extends CRUDService<History> {
@@ -16,45 +40,45 @@ export class HistoryService extends CRUDService<History> {
     super(historyModel);
   }
 
-  //TODO: you have to unroll a history without async storage or implement conditionals for actions performed by the system.
-  //TODO: add validations
-  async createHistoryRecord(params: {
-    entity: any;
-    actionType?: string;
+  private extractEntityData(entity: any) {
+    const modelName = entity?.constructor?.modelName ?? 'System';
+    const object = entity ? JSON.stringify(entity.toJSON?.() ?? entity) : null;
+    return { modelName, object };
+  }
+
+  private async createHistoryInternal(params: {
+    entity?: any;
+    actionType: string;
     actionStatus: string;
-    nextStatus: string;
+    nextStatus?: string;
     errorMessage?: string;
   }) {
-
     const { entity, actionType, actionStatus, nextStatus, errorMessage } =
       params;
-    const store = this.alsService.getStore();
 
-    const appUser = store.get('appUser');
-
-    const startTime = store.get('startTime');
+    const { modelName, object } = this.extractEntityData(entity);
+    const user = this.alsService.get(AlsKeysEnum.APP_USER);
+    const startTime = this.alsService.get(AlsKeysEnum.START_TIME);
 
     const newAction = await this.actionsService.create({
-      actionType:
-        actionType ||
-        `${nextStatus.toLowerCase()}${entity.constructor.modelName}`,
+      actionType,
       actionStatus,
-      agent: appUser?._id || null,
-      agentType: appUser ? 'AppUser' : 'System',
-      object: entity?._id || null,
-      objectType: entity.constructor.modelName,
+      agent: user?._id ?? null,
+      agentType: user ? ActionAgentTypesEnum.USER : ActionAgentTypesEnum.SYSTEM,
+      object,
+      objectType: modelName,
       startTime,
       endTime: new Date(),
-      ...(errorMessage ? { error: errorMessage } : {}), // Solo agrega error si existe
+      ...(errorMessage ? { error: errorMessage } : {}),
     });
 
     const newHistory = await super.create({
       action: newAction._id,
-      previousStatus: null, // TODO: manejar el previousStatus correctamente
+      previousStatus: null,
       nextStatus,
     });
 
-    if (entity) {
+    if (entity?.history && typeof entity.save === 'function') {
       entity.history.push(newHistory._id);
       await entity.save();
     }
@@ -62,34 +86,37 @@ export class HistoryService extends CRUDService<History> {
     return newHistory;
   }
 
-  async createHistory(entity: any, actionType?: string) {
-    return this.createHistoryRecord({
-      entity: entity,
-      actionType: actionType,
-      actionStatus: 'CompletedActionStatus', //TODO: change
-      nextStatus: 'Created',
+  async createHistory(params: CreateHistoryParams) {
+    const actionType =
+      params.actionType ??
+      `${ActionStatusEnum.CREATED.toLowerCase()}${params.entity.constructor.modelName}`;
+
+    return this.createHistoryInternal({
+      entity: params.entity,
+      actionType,
+      actionStatus: ActionStatusEnum.COMPLETED,
+      nextStatus: ActionStatusEnum.CREATED,
     });
   }
 
-  async updateHistory(entity: any, actionType?: string) {
-    return this.createHistoryRecord({
-      entity: entity,
-      actionType: actionType,
-      actionStatus: 'UpdatedStatus', //TODO: change
-      nextStatus: 'Updated',
+  async updateHistory(params: CreateHistoryParams) {
+    const actionType =
+      params.actionType ??
+      `${ActionStatusEnum.UPDATED.toLowerCase()}${params.entity.constructor.modelName}`;
+
+    return this.createHistoryInternal({
+      entity: params.entity,
+      actionType,
+      actionStatus: ActionStatusEnum.COMPLETED,
+      nextStatus: ActionStatusEnum.UPDATED,
     });
   }
 
-  async errorHistory(params: {
-    errorMessage: string;
-    entity?: any;
-    actionType?: string;
-  }) {
-    return this.createHistoryRecord({
+  async errorHistory(params: ErrorHistoryParams) {
+    return this.createHistoryInternal({
       entity: params.entity,
       actionType: params.actionType,
-      actionStatus: 'FailedActionStatus',
-      nextStatus: null,
+      actionStatus: ActionStatusEnum.ERROR,
       errorMessage: params.errorMessage,
     });
   }

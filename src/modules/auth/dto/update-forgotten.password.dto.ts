@@ -1,11 +1,25 @@
 //create-user.dto.ts
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsBoolean, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class UpdateForgottenPassword {
   @IsNotEmpty()
-  newPassword: string; //Username o password
+  newPassword: string;
 
   @IsString()
   @IsNotEmpty()
-  securityCodeId: string; //Username o password
+  securityCodeId: string;
+}
+
+export class UpdateUserPassword {
+  @IsString()
+  @IsNotEmpty()
+  newPassword: string;
+
+  @IsString()
+  @IsNotEmpty()
+  appUserId: string;
+
+  @IsBoolean()
+  @IsOptional()
+  sendEmail?: boolean;
 }

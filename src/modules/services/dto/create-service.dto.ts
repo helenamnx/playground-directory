@@ -19,10 +19,6 @@ export class CreateServiceDto {
   @IsString()
   alias: string;
 
-  @IsNotEmpty()
-  @IsBoolean()
-  isActive: boolean;
-
   @IsOptional()
   @IsString()
   externalPlatformId?: string;

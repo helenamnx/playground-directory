@@ -1,0 +1,27 @@
+{
+  "_id": "f8088c55-300d-48c3-94a3-bb70c3d375ad",
+  "contactPerson": "Tomás UO-APP",
+  "contactPoints": [
+    {
+      "type": "email",
+      "value": "tomas@uoapp.es"
+    }
+  ],
+  "website": "https://uoapp.es/",
+  "organizationSchedule": "L-S 10:00 - 20:00",
+  "organizationType": "admin",
+  "name": "Unión de Oficiales de la Guardia Civil",
+  "description": {
+    "es": "La Unión de Oficiales de la Guardia Civil es una asociación profesional que representa los intereses de los oficiales de la Guardia Civil en España.",
+    "en": "The Union of Officers of the Civil Guard is a professional association representing the interests of Civil Guard officers in Spain."
+  },
+  "shortDescription": {
+    "es": "Asociación profesional de oficiales de la Guardia Civil.",
+    "en": "Professional association of Civil Guard officers."
+  },
+  "address": {
+    "postalCode": null,
+    "streetAddress": null,
+    "addressLocality": { "es": "Madrid" }
+  }
+}

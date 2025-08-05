@@ -1,8 +1,7 @@
 services:
-  uoapp-db:
+  mnxo-uoapp-backend-db-playground:
     hostname: localhost
     image: mongo:7.0.11
-    restart: always
     container_name: ${DATABASE_NAME}
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${DATABASE_USER}
@@ -11,14 +10,13 @@ services:
       - '${DATABASE_EXTERNAL_PORT}:${DATABASE_INTERNAL_PORT}'
     volumes:
       - ./${DATABASE_NAME}:/data/db
-  uoapp-redis-db:
-    container_name: uoapp-redis-db
+  mnxo-uoapp-backend-redis-db-playground:
+    container_name: mnxo-uoapp-backend-redis-db-playground
     image: redis:7
     ports:
       - '${REDIS_EXTERNAL_PORT}:${REDIS_INTERNAL_PORT}'
     volumes:
-      - ./uoapp-redis-db:/data
+      - ./mnxo-uoapp-backend-redis-db-playground:/data
 volumes:
-  uoapp-redis-db:
-  uoapp-db:
-#TODO: Add everything related to Healthcheck.
+  mnxo-uoapp-backend-redis-db-playground:
+  mnxo-uoapp-backend-db-playground: #TODO: Add everything related to Healthcheck.

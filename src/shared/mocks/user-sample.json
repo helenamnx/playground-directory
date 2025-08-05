@@ -1,0 +1,73 @@
+{
+    "name": "Antonio José",
+    "lastName": "Pérez",
+    "age": 30,
+    "gender": "male",
+    "interests": [
+        "sports",
+        "music",
+        "travel"
+    ],
+    "legalDocumentation": {
+        "DNI": "987654321B",
+        "PASSPORT": "X1234567Y"
+    },
+    "memberNumber": "2982",
+    "username": "userName",
+    "alias": "example@example.com",
+    "email": "example@example.com",
+    "roles": [
+        {
+            "name": "admin",
+            "permissions": [
+                {
+                    "resource": "exams",
+                    "scopes": [
+                        "get-exams",
+                        "post-exams"
+                    ]
+                }
+            ],
+            "serviceId": "serviceId123",
+            "parents": [
+                "roleID1",
+                "roleID2"
+            ]
+        }
+    ],
+    "externalIds": {
+        "kCID": "1234567890"
+    },
+    "lastLogin": "2023-10-01T12:00:00Z",
+    "configuration": {
+        "isNotificationEnabled": true,
+        "isEmailEnabled": true,
+        "defaultLanguage": "ES"
+    },
+    "moderationStatusHistory": [
+        {
+            "observation": "Initial approval",
+            "moderationStatus": {
+                "status": {
+                    "type": "approved",
+                    "languageMap": {
+                        "en": "Approved",
+                        "es": "Aprobado"
+                    }
+                }
+            }
+        }
+    ],
+    "is2FAEnabled": false,
+    "subscriptions": [
+        "subscriptionId1",
+        "subscriptionId2"
+    ],
+    "images": [
+        {
+            "alt": "User Avatar",
+            "url": "https://example.com/image.jpg",
+            "imageType": "AVATAR"
+        }
+    ]
+}

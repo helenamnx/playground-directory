@@ -2,6 +2,7 @@ import { AxiosRequestConfig, Method } from 'axios';
 import { HttpService } from '@nestjs/axios';
 import { HttpRequestParams } from '../interfaces/http-request-params.interface';
 import { RedisService } from '../../services/redis/redis.service';
+import { RedisKeys } from '@/shared/enums/redis-keys.enum';
 
 export abstract class HttpRequestFactory {
   protected readonly httpService: HttpService;
@@ -16,7 +17,7 @@ export abstract class HttpRequestFactory {
       try {
         const config = await this.createAxiosRequestConfig(params, method);
         const response = await this.httpService.axiosRef.request(config);
-        return response.data.object || response;
+        return response?.data?.object || response;
       } catch (error: any) {
         if (error.response.data) {
           console.log(error.response.data);
@@ -39,9 +40,10 @@ export abstract class HttpRequestFactory {
     params: HttpRequestParams,
     method: Method,
   ): Promise<AxiosRequestConfig> {
-    let { endpoint, data, headers } = params;
-    const ownPlatformToken: any =
-      await this.redisService.get('own-platform-token');
+    let { endpoint, data, headers, queryParams } = params;
+    const ownPlatformToken: any = await this.redisService.get(
+      RedisKeys.OWN_PLATFORM_TOKEN,
+    );
     if (ownPlatformToken) {
       headers = {
         ...headers,
@@ -53,6 +55,7 @@ export abstract class HttpRequestFactory {
       method: method,
       headers: headers,
       data: data,
+      params: queryParams,
     };
     return config;
   }

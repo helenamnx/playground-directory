@@ -8,6 +8,10 @@ import { AsyncStorageService } from '../als/als.service';
 import { decodeToken, getTokenFromBearer } from '../../utils/token.utils';
 import { ConfigService } from '@nestjs/config';
 import { ClientsService } from '@/modules/clients/clients.service';
+import { ApiConfigKeysEnum } from '@/config/app.config';
+import { AlsKeysEnum } from '@/shared/enums/als-keys.enum';
+import { HeaderKeysEnum } from '@/shared/enums/headers.enum';
+import { PlatformsEnums } from '@/shared/enums/platforms.enums';
 
 @Injectable()
 export class ClientTokenHookService implements OnModuleInit {
@@ -18,17 +22,29 @@ export class ClientTokenHookService implements OnModuleInit {
     private readonly clientsService: ClientsService,
   ) {}
   async clientTokenHook(req: FastifyRequest, reply: FastifyReply) {
-    const appVersion = this.configService.get<string>('APP_VERSION');
-    const excludedRoutes = [
+    const appVersion = this.configService.get<string>(
+      ApiConfigKeysEnum.APP_VERSION,
+    );
+    const excludedPrefixes = [
       `/${appVersion}/auth/refresh-token`,
       `/${appVersion}/auth/client-token`,
-      `/${appVersion}`,
-    ]; //TODO: ver manera para evitar usar excluedRoutes
-    if (excludedRoutes.includes(req.routeOptions.url)) {
+      `/${appVersion}/platforms/clients`,
+      '/assets',
+    ]; //TODO: ver manera para evitar usar excludedRoutes
+    //check if the request URL starts with the specified excluded prefixes
+    const isExcluded = excludedPrefixes.some((prefix) =>
+      req.originalUrl.startsWith(prefix),
+    );
+    //if the request URL matches any excluded routes, return
+    if (
+      isExcluded ||
+      req.originalUrl === `/${appVersion}` ||
+      req.originalUrl === `/`
+    ) {
       return;
     }
 
-    const clientToken = req.headers['client-token'];
+    const clientToken = req.headers[HeaderKeysEnum.CLIENT_TOKEN];
     if (!clientToken) {
       throw new UnauthorizedCustomResponse({
         title: 'Missing client token',
@@ -36,10 +52,12 @@ export class ClientTokenHookService implements OnModuleInit {
         detail: 'Missing client token',
       });
     }
+
     const clientAccessToken = getTokenFromBearer(clientToken as string);
     const validToken = await this.authService.verifyTokenSession({
       access_token: clientAccessToken,
     });
+
     if (!validToken) {
       throw new UnauthorizedCustomResponse({
         title: 'Invalid client token',
@@ -48,14 +66,19 @@ export class ClientTokenHookService implements OnModuleInit {
       });
     }
     const decryptedClientToken = decodeToken(clientToken as string);
+    if (decryptedClientToken.client_id === PlatformsEnums.FIV_MANAGER) {
+      console.log('isFivManager');
+      return;
+    }
     const storedClient = await this.clientsService.findOne({
-      populateOptions: ['configuration'],
+      populateOptions: [
+        { path: 'configuration', populate: 'servicesEntrypoints' },
+      ],
       filterOptions: {
-        externalIds: {
-          $elemMatch: {
-            kcID: decryptedClientToken.sub,
-          },
-        },
+        $or: [
+          { clientId: decryptedClientToken.client_id },
+          { alias: decryptedClientToken.client_id },
+        ],
       },
       triggerError: false,
     });
@@ -73,8 +96,11 @@ export class ClientTokenHookService implements OnModuleInit {
         detail: 'Client token is not active',
       });
     }
-
-    this.alsService.set('decrypted-client-token', decryptedClientToken);
+    this.alsService.set(AlsKeysEnum.CLIENT, storedClient);
+    this.alsService.set(
+      AlsKeysEnum.DEFAULT_LANGUAGE,
+      storedClient.configuration.defaultLanguage,
+    );
   }
 
   onModuleInit() {

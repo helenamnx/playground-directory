@@ -1,0 +1,9 @@
+*
+!/package.json
+# !/bun.lockb
+!/tsconfig.prod.json
+!/tsconfig.json
+!/.swcrc
+!/nest-cli.json
+!/src
+!/assets

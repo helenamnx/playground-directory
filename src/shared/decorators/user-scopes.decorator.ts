@@ -5,5 +5,5 @@ import { SetMetadata } from '@nestjs/common';
 //   SetMetadata(USER_SCOPE_KEY, user_client_scope);
 
 export const Resource = (resource: string) => SetMetadata('resource', resource);
-export const UserScopes = (scope: string) => SetMetadata('scope', scope);
+export const UserScope = (scope: string) => SetMetadata('scope', scope);
 export const Roles = (roles: string[]) => SetMetadata('roles', roles);

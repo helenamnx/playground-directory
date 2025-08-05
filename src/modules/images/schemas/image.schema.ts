@@ -2,7 +2,6 @@
 import { Thing } from '@/shared/schemas/thing.schema';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ImageTypeEnum } from '../enums/type-image.enum';
-import { HistorySchema } from '@/modules/history/schemas/history.schema';
 
 /**
  * @description

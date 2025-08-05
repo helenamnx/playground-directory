@@ -1,4 +1,4 @@
-import { FilterQuery, PopulateOptions } from 'mongoose';
+import { FilterQuery, PopulateOptions, SortOrder } from 'mongoose';
 
 /**
  * Class representing the parameters for a find operation.
@@ -8,6 +8,7 @@ export class FindParams<T> {
   filterOptions: FilterQuery<T>;
   populateOptions: (Extract<keyof T, string> | PopulateOptions)[];
   selectOptions: Extract<keyof T, string>[] | string[];
+  sortOptions: Partial<Record<Extract<keyof T, string>, SortOrder>>;
   triggerError: boolean;
 
   /**
@@ -19,11 +20,17 @@ export class FindParams<T> {
    * @param {boolean} [params.triggerError] - Flag to trigger an error.
    */
   constructor(params: Partial<FindParams<T>>) {
-    const { filterOptions, populateOptions, selectOptions, triggerError } =
-      params;
+    const {
+      filterOptions,
+      populateOptions,
+      selectOptions,
+      triggerError,
+      sortOptions,
+    } = params;
     this.filterOptions = filterOptions || {};
     this.populateOptions = populateOptions || [];
     this.selectOptions = selectOptions || [];
     this.triggerError = triggerError || true;
+    this.sortOptions = sortOptions || {};
   }
 }

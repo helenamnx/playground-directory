@@ -15,22 +15,27 @@ export class EmailsService {
 
       await this.request.POST({
         endpoint: `${platform.baseURL}/emails/send`, //TODO: change url
+        data: createEmailDto,
       });
       return { message: 'Email sent' };
     } catch (e) {
       console.log(e);
-      throw new CustomErrorResponse(e.response.data);
+      throw new CustomErrorResponse(e);
     }
   }
 
-  sendEmail(createEmailDto: CreateEmailDto) {
+  //TODO: use email service to send email
+  sendEmail() {
+    //createEmailDto: CreateEmailDto
     try {
-      const { platform } = createEmailDto;
-      this.request.POST({
-        endpoint: `${platform.baseURL}/emails/send`, //TODO: change url
-        data: createEmailDto,
-      });
-      return { message: 'Email sent' };
+      console.log('Sending email...');
+      return;
+      // const { platform } = createEmailDto;
+      // this.request.POST({
+      //   endpoint: `${platform.baseURL}/emails/send`, //TODO: change url
+      //   data: createEmailDto,
+      // });
+      // return { message: 'Email sent' };
     } catch (e) {
       console.log(e);
       throw new CustomErrorResponse(e);

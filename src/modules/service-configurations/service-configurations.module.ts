@@ -6,9 +6,11 @@ import {
   ServiceConfiguration,
   ServiceConfigurationSchema,
 } from './schemas/service-configuration.schema';
+import { ActionSpecificationsModule } from '../action-specifications/action-specifications.module';
 
 @Module({
   imports: [
+    ActionSpecificationsModule,
     MongooseModule.forFeature([
       { name: ServiceConfiguration.name, schema: ServiceConfigurationSchema },
     ]),

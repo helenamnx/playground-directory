@@ -5,7 +5,7 @@ import { IsString, IsOptional, IsNotEmpty } from 'class-validator';
 export class CreateInformationDto {
   @IsString()
   @IsOptional()
-  author: string;
+  author?: string;
 
   @IsString()
   @IsNotEmpty()

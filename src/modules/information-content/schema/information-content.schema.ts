@@ -1,6 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Thing } from 'src/shared/schemas/thing.schema';
 import mongoose from 'mongoose';
+import { LanguageMapType } from '@/shared/types/language-map.type';
 @Schema()
 export class InformationContent extends Thing {
   /**
@@ -10,7 +11,7 @@ export class InformationContent extends Thing {
   @Prop({
     type: mongoose.Schema.Types.Mixed,
   })
-  title: string | Map<string, string>;
+  title: string | LanguageMapType;
 
   /**
    * The subtitle of the translation.
@@ -19,7 +20,7 @@ export class InformationContent extends Thing {
   @Prop({
     type: mongoose.Schema.Types.Mixed,
   })
-  subtitle: string | Map<string, string>;
+  subtitle: string | LanguageMapType;
 
   /**
    * The body of the translation.
@@ -28,7 +29,7 @@ export class InformationContent extends Thing {
   @Prop({
     type: mongoose.Schema.Types.Mixed,
   })
-  body: string | Map<string, string>;
+  body: string | LanguageMapType;
 
   /**
    * The slug of the translation.
@@ -37,7 +38,7 @@ export class InformationContent extends Thing {
   @Prop({
     type: mongoose.Schema.Types.Mixed,
   })
-  slug: string | Map<string, string>;
+  slug: string | LanguageMapType;
 }
 export const InformationContentSchema =
   SchemaFactory.createForClass(InformationContent);

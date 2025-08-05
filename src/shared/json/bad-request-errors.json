@@ -1,0 +1,7 @@
+{
+  "INVALID_DNI": {
+    "title": "Invalid DNI",
+    "key": "INVALID_DNI",
+    "detail": "Invalid DNI"
+  }
+}

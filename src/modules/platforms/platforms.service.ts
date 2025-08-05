@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreatePlatformDto } from './dto/create-platform.dto';
 import { UpdatePlatformDto } from './dto/update-platform.dto';
-import { AssingClientToPlatformDto } from './dto/assing-client-to-platform.dto';
 import { CRUDService } from '@/config/database/CRUD/crud.service';
 import { CustomErrorKeys } from '@/shared/enums/error-keys.enum';
 import { BadRequestCustomResponse } from '@/shared/responses/error/custom-error-response';
@@ -16,6 +15,10 @@ import { CreateServiceDto } from '../services/dto/create-service.dto';
 import { ConfigService } from '@nestjs/config';
 import { CreateClientDto } from '../clients/dto/create-client.dto';
 import { UpdateClientDto } from '../clients/dto/update-client.dto';
+import { PlatformTechnologies } from '@/shared/enums/platform-technologies.enum';
+import { compileVariablesFromString } from '@/shared/utils/handlebars.utils';
+import { Client } from '../clients/schemas/client.schema';
+import { Service } from '../services/schemas/service.schema';
 
 @Injectable()
 export class PlatformsService extends CRUDService<Platform> {
@@ -252,8 +255,127 @@ export class PlatformsService extends CRUDService<Platform> {
       filterOptions: {
         alias: this.ownPlatformAlias,
       },
-      populateOptions: ['services', 'configuration'],
+      populateOptions: [
+        {
+          path: 'clients',
+          populate: [
+            { path: 'configuration', populate: 'servicesEntrypoints' },
+          ],
+        },
+        ,
+        {
+          path: 'services',
+          populate: [
+            { path: 'configuration', populate: 'servicesEntrypoints' },
+          ],
+        },
+        'configuration',
+      ],
     });
     return storedPlatform;
+  }
+
+  /**
+   * @description This function returns the client or service from the platform
+   * @author Damian
+   * @date 01/07/2025
+   * @param {{
+   *     technology: PlatformTechnologies;
+   *     isClient: boolean;
+   *     isService: boolean;
+   *   }} params
+   * @returns {*}  {(Promise<Client | Service>)}
+   * @memberof PlatformsService
+   */
+  async getClientOrServiceFromByTechnology(params: {
+    technology: PlatformTechnologies;
+    isClient?: boolean;
+    isService?: boolean;
+  }): Promise<Client | Service> {
+    try {
+      const { technology, isClient, isService } = params;
+      const storedPlatform = await this.getOwnPlatform();
+      if (isClient) {
+        return storedPlatform.clients.find(
+          (client) => client.technology === technology,
+        );
+      }
+      if (isService) {
+        return storedPlatform.services.find(
+          (service) => service.technology === technology,
+        );
+      }
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
+  }
+
+  /**
+   * @description This function returns the completed endpoint of the service
+   *  that matches the action. It also compiles the variables with the provided values.
+   * @author Damian
+   * @date 10/06/2025
+   * @param {string} action
+   * @param {Record<string, string>} variables
+   * @returns {*}  {Promise<string>}
+   * @memberof PlatformsService
+   */
+  async getCompletedEndpoint(params: {
+    action: string;
+    variables: Record<string, string>;
+    client?: Client;
+    service?: Service;
+  }): Promise<string> {
+    try {
+      const { action, variables, client, service } = params;
+      if (!client && !service) {
+        throw new BadRequestCustomResponse({
+          title: 'Missing client or service',
+          detail: 'Missing client or service',
+          key: CustomErrorKeys.MISSING_CLIENT_OR_SERVICE,
+        });
+      }
+      let baseURL: string = '';
+      let endpointPath: string = '';
+      if (client) {
+        //get the endpoint path by the action
+        baseURL = client.baseURL;
+        endpointPath = client.configuration.servicesEntrypoints.find(
+          (service) => service.action === action,
+        ).endpointPath;
+
+        //compile the variables from the string
+        endpointPath = compileVariablesFromString(endpointPath, variables);
+      } else {
+        //get the endpoint path by the action
+        baseURL = service.baseURL;
+        endpointPath = service.configuration.servicesEntrypoints.find(
+          (service) => service.action === action,
+        ).endpointPath;
+
+        //compile the variables from the string
+        endpointPath = compileVariablesFromString(endpointPath, variables);
+      }
+
+      // //check if the service is active
+      // if (!idmService.configuration.isActive) {
+      //   throw new BadRequestCustomResponse({
+      //     title: 'Service not active',
+      //     detail: 'Service is not active',
+      //     key: CustomErrorKeys.SERVICE_NOT_ACTIVE,
+      //   });
+      // }
+
+      //return the endpoint with the baseUrl
+      return `${baseURL}${endpointPath}`;
+    } catch (e) {
+      console.log(e);
+      throw e;
+    }
+  }
+
+  async countDocuments() {
+    return this.platformModel.countDocuments();
   }
 }

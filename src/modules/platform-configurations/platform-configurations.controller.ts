@@ -28,25 +28,25 @@ export class PlatformConfigurationsController {
     return newPlatformConfiguration;
   }
 
-  @Get()
-  findAll() {
-    //TODO: retornar la configuración de la plataforma
-    return this.platformConfigurationsService.findAllPlatformsConfigurations();
-  }
+  // @Get()
+  // findAll() {
+  //   //TODO: retornar la configuración de la plataforma
+  //   return this.platformConfigurationsService.findAllPlatformsConfigurations();
+  // }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    //TODO: Auteticación de usuario
-    // si autenticación falla, lanzar error
-    // si autenticación es correcta, continuar
-    //TODO: GET /platform-configurations
-    //si no existe la configuración de la plataforma, lanzar error
-    //si existe la configuración de la plataforma, continuar
-    //TODO: retornar la configuración de la plataforma
-    return this.platformConfigurationsService.findOnePlatformsConfiguration(
-      +id,
-    );
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   //TODO: Auteticación de usuario
+  //   // si autenticación falla, lanzar error
+  //   // si autenticación es correcta, continuar
+  //   //TODO: GET /platform-configurations
+  //   //si no existe la configuración de la plataforma, lanzar error
+  //   //si existe la configuración de la plataforma, continuar
+  //   //TODO: retornar la configuración de la plataforma
+  //   return this.platformConfigurationsService.findOnePlatformsConfiguration(
+  //     +id,
+  //   );
+  // }
 
   @Patch(':id')
   update(

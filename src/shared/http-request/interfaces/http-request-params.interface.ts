@@ -3,4 +3,5 @@ export interface HttpRequestParams {
   data?: any;
   headers?: any;
   triggerError?: boolean;
+  queryParams?: any;
 }

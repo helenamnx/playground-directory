@@ -17,12 +17,12 @@ export class ClientConfigurationsController {
     private readonly clientConfigurationsService: ClientConfigurationsService,
   ) {}
 
-  @Post()
-  create(@Body() createClientConfigurationDto: CreateClientConfigurationDto) {
-    return this.clientConfigurationsService.createClientConfiguration(
-      createClientConfigurationDto,
-    );
-  }
+  // @Post()
+  // create(@Body() createClientConfigurationDto: CreateClientConfigurationDto) {
+  //   return this.clientConfigurationsService.createClientConfiguration(
+  //     createClientConfigurationDto,
+  //   );
+  // }
 
   @Get()
   findAll() {
@@ -45,8 +45,8 @@ export class ClientConfigurationsController {
   //   );
   // }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.clientConfigurationsService.removeClientConfiguration(+id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.clientConfigurationsService.removeClientConfiguration(+id);
+  // }
 }

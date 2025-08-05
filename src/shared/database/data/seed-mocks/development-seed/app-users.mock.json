@@ -1,0 +1,40 @@
+[
+  {
+    "memberNumber": "2982",
+    "name": "Antonio José",
+    "lastName": "Pérez",
+    "user": {
+      "username": "uoapp-admin",
+      "email": "uoapp@admin.com",
+      "alias": "uoapp@admin.com",
+      "roles": ["5f7e5d1c-b360-440d-8bb9-4b34979c045a"],
+      "externalIds": {
+        "kcID": "2efda01c-bf4d-4659-a290-6b170636ba51"
+      }
+    },
+    "legalDocumentation": {
+      "DNI": "12345678X"
+    }
+  },
+  {
+    "memberNumber": "3000",
+    "name": "User socio test",
+    "lastName": "Test",
+    "groups": ["8f9ffbe4-2ffc-489e-8c64-a274d1c07339"],
+    "user": {
+      "username": "user-socio-test",
+      "email": "usersociotest@test.com",
+      "alias": "usersociotest@test.com",
+      "roles": [
+        "9bc6581d-7aae-474c-a67a-964d3254451c",
+        "5fe82c68-0641-4e66-a122-cd81c17bf680"
+      ],
+      "externalIds": {
+        "kcID": "e5c3c0d4-a74c-45c2-9f8f-1a4933f1b7cf"
+      }
+    },
+    "legalDocumentation": {
+      "DNI": "11111111H"
+    }
+  }
+]

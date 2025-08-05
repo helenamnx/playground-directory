@@ -18,7 +18,7 @@ const environment = process.env.NODE_ENV || 'development';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: `.${process.env.NODE_ENV}.env`,
+      envFilePath: `.${environment}.env`,
       cache: true,
       load: [
         appConfig,

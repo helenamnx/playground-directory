@@ -33,10 +33,12 @@ export class SecurityCodesController {
   }
 
   @Get('check/:id')
-  @Roles(['administrator'])
-  @UseGuards(UserTokenGuard)
+  // @Roles(['administrator'])
+  // @UseGuards(UserTokenGuard)
   async checkSecurityCode(@Param('id') id: string) {
-    return await this.securityCodesService.checkSecurityCode(id);
+    const securityCode = await this.securityCodesService.checkSecurityCode(id);
+
+    return { isActive: securityCode ? true : false };
   }
 
   @Delete(':id')

@@ -1,20 +1,22 @@
 import { ConfigService } from '@nestjs/config';
-import { NestFactory } from '@nestjs/core';
+import { NestFactory, Reflector } from '@nestjs/core';
 import {
   NestFastifyApplication,
   FastifyAdapter,
 } from '@nestjs/platform-fastify';
-import { Logger } from '@nestjs/common';
+import { Logger, UseGuards } from '@nestjs/common';
 import { AppModule } from 'src/app.module';
 import { corsConfig } from 'src/config/cors.config';
 import { setupGlobalPipes } from './app.utils';
 import { winstonLoggerConfig } from 'src/config/log/winston.config';
-import { filterOptionsPreHook } from '../hooks/filter-options.hook';
-import { paginationPreHook } from '../hooks/pagination.hook';
 import { setupRequestLogging } from 'src/shared/utils/app.utils';
 import fastifyStatic from '@fastify/static';
 import fastifyMulter from 'fastify-multer';
 import fastify from 'fastify';
+import { UserTokenGuard } from '../guards/user-token.guard';
+import { AuthService } from '@/modules/auth/auth.service';
+import { AsyncStorageService } from '../services/als/als.service';
+import { multipart } from 'fastify-multipart';
 
 export const fastifyInstance = fastify();
 
@@ -23,7 +25,7 @@ export const configureApp = async () => {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
     new FastifyAdapter(fastifyInstance),
-    { logger: winstonLoggerConfig('basic-template') },
+    { logger: winstonLoggerConfig('mnxo-uoapp-backend') },
   );
   const configService: ConfigService = app.get(ConfigService);
   const port = configService.get<string>('PORT', '3000');
@@ -35,8 +37,6 @@ export const configureApp = async () => {
   app.enableCors(corsConfig);
 
   setupGlobalPipes(app);
-  filterOptionsPreHook();
-  paginationPreHook();
   setupRequestLogging();
   const logger = new Logger('configureApp');
 

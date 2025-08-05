@@ -1,12 +1,13 @@
 import { CreateClientConfigurationDto } from '@/modules/client-configurations/dto/create-client-configuration.dto';
-import { KeyValue } from '@/shared/schemas/key-value.schema';
-import { Prop } from '@nestjs/mongoose';
+import { CreateContactPointDto } from '@/modules/contact-points/dto/create-contact-point.dto';
+import { CreateInformationDto } from '@/modules/information/dto/create-information.dto';
 import { Type } from 'class-transformer';
 import {
   IsString,
   IsNotEmpty,
   ValidateNested,
   IsOptional,
+  IsArray,
 } from 'class-validator';
 
 export class CreateClientDto {
@@ -22,7 +23,7 @@ export class CreateClientDto {
   @IsOptional()
   externalPlatformId?: string;
 
-  externalIds: KeyValue[];
+  externalIds: Record<string, string>;
 
   @IsString()
   @IsNotEmpty()
@@ -35,4 +36,17 @@ export class CreateClientDto {
   @ValidateNested()
   @Type(() => CreateClientConfigurationDto)
   configuration: CreateClientConfigurationDto;
+
+  @IsOptional()
+  organization?: string;
+
+  @IsArray()
+  @IsOptional()
+  @Type(() => CreateInformationDto)
+  information?: CreateInformationDto[];
+
+  @IsArray()
+  @IsOptional()
+  @Type(() => CreateContactPointDto)
+  contactPoints?: CreateContactPointDto[];
 }

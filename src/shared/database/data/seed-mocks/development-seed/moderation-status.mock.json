@@ -1,0 +1,64 @@
+[
+  {
+    "status": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "Registration approved",
+        "es": "Registro aprobado"
+      }
+    },
+    "alias": "MODERATION_APPROVED"
+  },
+  {
+    "status": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "Rejected",
+        "es": "Rechazado"
+      }
+    },
+    "alias": "MODERATION_REJECTED"
+  },
+  {
+    "status": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "Pending review",
+        "es": "Pendiente de revisión"
+      }
+    },
+    "alias": "MODERATION_PENDING"
+  },
+  {
+    "status": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "Confirmation email sent",
+        "es": "Correo de activación enviado"
+      }
+    },
+    "alias": "MODERATION_EMAIL_RESENT"
+  },
+
+  {
+    "status": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "Deactivated",
+        "es": "Desactivado"
+      }
+    },
+    "alias": "USER_DEACTIVATED"
+  },
+
+  {
+    "status": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "Activated",
+        "es": "Activado"
+      }
+    },
+    "alias": "USER_ACTIVATED"
+  }
+]

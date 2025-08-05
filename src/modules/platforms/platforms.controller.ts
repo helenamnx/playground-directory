@@ -17,6 +17,7 @@ import { CreateServiceDto } from '../services/dto/create-service.dto';
 import { ServicesService } from '../services/services.service';
 import { AssingClientToPlatformDto } from './dto/assing-client-to-platform.dto';
 import { CreateClientDto } from '../clients/dto/create-client.dto';
+import { UserTokenGuard } from '@/shared/guards/user-token.guard';
 //import { Roles } from '@/shared/decorators/user-scopes.decorator';
 //import { UserTokenGuard } from '@/shared/guards/user-token.guard';
 

@@ -12,8 +12,11 @@ export class ClientConfiguration extends Configuration {
   @Prop({ required: true, default: 'en' })
   supportedLanguages: string[];
 
-  @Prop({ required: true, type: String })
-  forgotUrl: string;
+  @Prop({ required: true, default: 'en' })
+  defaultLanguage: string;
+
+  // @Prop({ required: true, type: String })
+  // forgotUrl: string;
 }
 
 export const ClientConfigurationSchema =

@@ -1,0 +1,92 @@
+[
+  {
+    "title": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "Created",
+        "es": "Creado"
+      }
+    },
+    "value": "CREATED"
+  },
+  {
+    "title": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "Finished",
+        "es": "Finalizado"
+      }
+    },
+    "value": "FINISHED"
+  },
+  {
+    "title": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "Abandoned",
+        "es": "Abandonado"
+      }
+    },
+    "value": "ABANDONED"
+  },
+  {
+    "title": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "Approved",
+        "es": "Aprobado"
+      }
+    },
+    "value": "APPROVED"
+  },
+  {
+    "title": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "Failed",
+        "es": "Suspenso"
+      }
+    },
+    "value": "FAILED"
+  },
+  {
+    "title": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "In process",
+        "es": "En proceso"
+      }
+    },
+    "value": "IN_PROCESS"
+  },
+  {
+    "title": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "En progress",
+        "es": "En progreso"
+      }
+    },
+    "value": "IN_PROGRESS"
+  },
+  {
+    "title": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "Completed",
+        "es": "Completado"
+      }
+    },
+    "value": "COMPLETED"
+  },
+  {
+    "title": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "Pending",
+        "es": "Pendiente"
+      }
+    },
+    "value": "PENDING"
+  }
+]

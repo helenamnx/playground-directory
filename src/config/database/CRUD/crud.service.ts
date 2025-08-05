@@ -1,5 +1,5 @@
 // Import necessary modules from Mongoose and NestJS
-import { Model } from 'mongoose';
+import { Model, PopulateOptions } from 'mongoose';
 import { Injectable, Logger } from '@nestjs/common';
 import { ICRUDService } from './interfaces/crud.interface';
 import { formatSearchedParams } from './utils/format-searched-params.utils';
@@ -94,6 +94,7 @@ export class CRUDService<T> implements ICRUDService<T> {
       populateOptions = [],
       selectOptions = [],
       triggerError = true,
+      sortOptions = {},
     } = params;
 
     const entity = await this.model
@@ -103,6 +104,7 @@ export class CRUDService<T> implements ICRUDService<T> {
       .populate(populateOptions)
       // Use dynamic select options
       .select(selectOptions)
+      .sort(sortOptions)
       .exec();
 
     // If entity not found and triggerError is true, throw error
@@ -112,7 +114,6 @@ export class CRUDService<T> implements ICRUDService<T> {
       // Get the error key from the CustomErrorKeys enum
       const errorKey =
         `${this.modelName.toUpperCase()}_NOT_FOUND` as keyof typeof CustomErrorKeys;
-
       // Throw a NotFoundCustomResponse error
       throw new NotFoundCustomResponse({
         title: `${this.modelName} not found`,
@@ -183,12 +184,22 @@ export class CRUDService<T> implements ICRUDService<T> {
    * @param {any} dto - The data transfer object containing the updated data.
    * @returns {Promise<T>} A promise that resolves to the updated document.
    */
-  async update(_id: string, dto: any): Promise<T> {
-    const updatedEntity = await this.model.findOneAndUpdate(
+  async update(
+    _id: string,
+    dto: any,
+    populateOptions?: (PopulateOptions | Extract<keyof T, string>)[],
+  ): Promise<T> {
+    let query = this.model.findOneAndUpdate(
       { _id },
       { ...dto, updatedAt: new Date() },
       { new: true },
     );
+
+    if (populateOptions) {
+      query = query.populate(populateOptions);
+    }
+
+    const updatedEntity = await query;
     if (!updatedEntity) {
       // Format searched params
       const searchedParams = formatSearchedParams({ _id: _id });

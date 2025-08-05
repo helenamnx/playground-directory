@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { UpdatePlatformConfigurationDto } from './dto/update-platform.dto';
 import { CreatePlatformConfigurationDto } from './dto/create-platform.dto';
 import { CRUDService } from '@/config/database/CRUD/crud.service';
-import { platformMock } from '@/shared/mocks/platform.mock';
 import { generateUUID } from '@/shared/utils/generate-uuid.util';
 import { InjectModel } from '@nestjs/mongoose';
 import { HistoryService } from '../history/history.service';
@@ -42,13 +41,13 @@ export class PlatformConfigurationsService extends CRUDService<PlatformConfigura
     }
   }
 
-  findAllPlatformsConfigurations() {
-    return platformMock.configuration;
-  }
+  // findAllPlatformsConfigurations() {
+  //   return platformMock.configuration;
+  // }
 
-  findOnePlatformsConfiguration(id: number) {
-    return platformMock.configuration;
-  }
+  // findOnePlatformsConfiguration(id: number) {
+  //   return platformMock.configuration;
+  // }
 
   async updatePlatformConfiguration(
     updatePlatformConfigurationDto: UpdatePlatformConfigurationDto,

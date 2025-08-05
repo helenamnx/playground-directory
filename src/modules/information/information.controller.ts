@@ -22,7 +22,7 @@ export class InformationController {
 
   @Get()
   findAll() {
-    return this.informationService.findAll();
+    return this.informationService.findAll({});
   }
 
   @Get(':id')
@@ -30,13 +30,13 @@ export class InformationController {
     return this.informationService.findOneInformation(id);
   }
 
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateInformationDto: UpdateInformationDto,
-  ) {
-    return this.informationService.updateInformation(id, updateInformationDto);
-  }
+  // @Patch(':id')
+  // update(
+  //   @Param('id') id: string,
+  //   @Body() updateInformationDto: UpdateInformationDto,
+  // ) {
+  //   return this.informationService.updateInformation(updateInformationDto);
+  // }
 
   @Delete(':id')
   remove(@Param('id') id: string) {

@@ -10,10 +10,10 @@ CYAN='\033[0;36m'
 NC='\033[0m' # No Color
 
 # Constants
-DB_VOLUME="./uoapp-db"
-PROJECT_NAME="uoapp-backend"
+DB_VOLUME="./mnxo-uoapp-backend-db-playground"
+PROJECT_NAME="mnxo-uoapp-backend"
 DOCKER_HUB_USER="mnxonline"
-DB_VOLUME_PRE_PROD="./uoapp-db-pre-production"
+DB_VOLUME_PRE_PROD="./mnxo-uoapp-backend-db-pre-prod"
 
 # Function to show the menu
 show_menu() {
@@ -105,17 +105,17 @@ top_remove_docker() {
 # Function to run tests
 run_tests() {
     echo -e "${CYAN}---------------------------------${NC}"
-    echo -e "${GREEN}Running tests with 'npm run test'...${NC}"
+    echo -e "${GREEN}Running tests with 'bun run test'...${NC}"
     echo -e "${CYAN}---------------------------------${NC}"
-    npm run test
+    bun run test
 }
 
 # Function to run linter
 run_linter() {
     echo -e "${CYAN}---------------------------------${NC}"
-    echo -e "${GREEN}Running linter with 'npm run lint'...${NC}"
+    echo -e "${GREEN}Running linter with 'bun run lint'...${NC}"
     echo -e "${CYAN}---------------------------------${NC}"
-    npm run lint
+    bun run lint
 }
 
 # Function to build a Docker image
@@ -223,10 +223,10 @@ while true; do
             restart_docker
             ;;
         3)
-            generate_resource
+            restart_docker_pre_prod
             ;;
         4)
-            restart_docker
+            generate_resource
             ;;
         5)
             run_tests
@@ -234,10 +234,16 @@ while true; do
         6)
             run_linter
             ;;
-        7) 
+        7)
+            build_docker_image
+            ;;
+        8) 
+            push_existing_image
+            ;;
+        9)
             add_env_variable
             ;;
-        8)
+        0)
             exit_script
             ;;
         *)

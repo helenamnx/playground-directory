@@ -12,3 +12,7 @@ export enum SecurityCodeStatus {
   USED = 'USED',
   EXPIRED = 'EXPIRED',
 }
+
+export enum SecurityCodeEmailsSent {
+  FIRST_EMAIL_SENT = 1,
+}

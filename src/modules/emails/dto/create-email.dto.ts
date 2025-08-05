@@ -1,5 +1,11 @@
 import { Service } from '@/modules/services/schemas/service.schema';
-import { IsArray, IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class CreateEmailDto {
   //TODO: mejorar dto
@@ -29,8 +35,11 @@ export class CreateEmailDto {
   recipients: any[];
 
   @IsArray()
-  ccRecipients: [];
+  ccRecipients: { email: string }[];
 
   @IsArray()
-  bccRecipients: [];
+  bccRecipients: { email: string }[];
+
+  @IsOptional()
+  attachments?: Express.Multer.File[];
 }

@@ -1,0 +1,7 @@
+{
+  "USER_ALREADY_EXISTS": {
+    "title": "User already exists",
+    "key": "USER_ALREADY_EXISTS",
+    "detail": "User already exists in the database"
+  }
+}

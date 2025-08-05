@@ -11,6 +11,9 @@ export class UserConfiguration extends Configuration {
 
   @Prop({ type: String, required: true, default: 'EN' })
   defaultLanguage: string;
+
+  @Prop({ type: Boolean, default: false })
+  is2FAEnabled: boolean;
 }
 export const UserConfigurationSchema =
   SchemaFactory.createForClass(UserConfiguration);

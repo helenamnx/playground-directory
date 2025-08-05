@@ -12,6 +12,9 @@ import {
 import { AsyncStorageService } from '../als/als.service';
 import { ConfigService } from '@nestjs/config';
 import { EntitiesService } from '../entities/entities.service';
+import { HeaderKeysEnum } from '@/shared/enums/headers.enum';
+import { AlsKeysEnum } from '@/shared/enums/als-keys.enum';
+import { AppUsersService } from '@/modules/app-users/app-users.service';
 
 @Injectable()
 export class UserTokenHookService implements OnModuleInit {
@@ -20,17 +23,32 @@ export class UserTokenHookService implements OnModuleInit {
     private readonly alsService: AsyncStorageService,
     private readonly configService: ConfigService,
     private readonly entitiesService: EntitiesService,
-    //   private readonly entitiesService: EntitiesService,
-    // private readonly servicesService: ServicesService,
+    private readonly appUsersService: AppUsersService,
   ) {}
   async userTokenHook(req: any, reply: FastifyReply) {
     const appVersion = this.configService.get<string>('APP_VERSION');
-    const excludedRoutes = [`/${appVersion}/auth/refresh-token`]; //TODO: ver manera para evitar usar excluedRoutes
+    const excludedPrefixes = [
+      `/${appVersion}/auth/refresh-token`,
+      `/${appVersion}/auth/client-token`,
+      `/${appVersion}/auth/login`,
+      // `/${appVersion}/auth/logout`,
+    ]; //TODO: ver manera para evitar usar excluedRoutes
 
-    if (excludedRoutes.includes(req.routeOptions.url)) {
+    //check if the request URL starts with the specified excluded prefixes
+    const isExcluded = excludedPrefixes.some((prefix) =>
+      req.originalUrl.startsWith(prefix),
+    );
+
+    //if the request URL matches any excluded routes, return
+    if (
+      isExcluded ||
+      req.originalUrl === `/${appVersion}` ||
+      req.originalUrl === `/`
+    ) {
       return;
     }
-    const userToken = req.headers['authorization'];
+
+    const userToken = req.headers[HeaderKeysEnum.AUTHORIZATION.toLowerCase()];
     if (!userToken) {
       // throw new UnauthorizedCustomResponse({
       //   title: 'Missing user token',
@@ -40,24 +58,12 @@ export class UserTokenHookService implements OnModuleInit {
 
       return;
     }
-    // // TODO: dejar de usar
-    // const messagingPlatform = await this.servicesService.findOne({
-    //   filterOptions: { name: 'fivolution-messaging' },
-    //   populateOptions: ['configuration'],
-    //   triggerError: false,
-    // });
-    // if (messagingPlatform)
-    //   req.headers['messages-microservice'] = messagingPlatform;
-    // const emailPlatform = await this.servicesService.findOne({
-    //   filterOptions: { name: 'fivolution-email' },
-    //   populateOptions: ['configuration'],
-    //   triggerError: false,
-    // });
-    // if (emailPlatform) req.headers['email-platform'] = emailPlatform;
+
     const decryptedUserToken = decodeToken(userToken as string);
-      const userAccessToken = getTokenFromBearer(userToken);
-    const validToken =
-      await this.authService.verifyUserSession(userAccessToken);
+    const userAccessToken = getTokenFromBearer(userToken);
+    const validToken = await this.authService.verifyTokenSession({
+      access_token: userAccessToken,
+    });
     if (!validToken) {
       if (isTokenExpired(decryptedUserToken)) {
         throw new UnauthorizedCustomResponse({
@@ -73,21 +79,10 @@ export class UserTokenHookService implements OnModuleInit {
         });
       }
     }
-
-    // console.log(
-    //   decryptedUserToken,
-    //   this.alsService.get('decrypted-client-token'),
-    // );
-    const userRole =
-      validToken.resource_access[
-        this.alsService.get('decrypted-client-token').client_id
-      ].roles;
-
-    //TODO: add entities service
-    const entityRole = await this.entitiesService.findEntityByRole(
-      userRole[0],
-      validToken.sub,
+    const storedAppUser = await this.appUsersService.findByUserCredentials(
+      validToken.username,
     );
+    this.alsService.set(AlsKeysEnum.APP_USER, storedAppUser);
   }
 
   onModuleInit() {

@@ -1,0 +1,495 @@
+[
+  {
+    "name": "Dashboard",
+    "displayName": "Dashboard",
+    "uris": [],
+    "scopes": [
+      {
+        "name": "read"
+      }
+    ],
+    "ownerManagedAccess": false
+  },
+  {
+    "name": "Posts",
+    "displayName": "Posts",
+    "uris": [],
+    "scopes": [
+      {
+        "name": "publish_posts"
+      },
+      {
+        "name": "create_posts"
+      },
+      {
+        "name": "edit_posts"
+      },
+      {
+        "name": "delete_posts"
+      },
+      {
+        "name": "edit_published_posts"
+      },
+      {
+        "name": "delete_published_posts"
+      },
+      {
+        "name": "manage_categories"
+      },
+      {
+        "name": "set_posts_status"
+      },
+      {
+        "name": "read_others_posts"
+      },
+      {
+        "name": "edit_others_posts"
+      },
+      {
+        "name": "delete_others_posts"
+      },
+      {
+        "name": "read_private_posts"
+      },
+      {
+        "name": "delete_private_posts"
+      }
+    ],
+    "ownerManagedAccess": false
+  },
+  {
+    "name": "Media",
+    "displayName": "Media",
+    "uris": [],
+    "scopes": [
+      {
+        "name": "upload_files"
+      },
+      {
+        "name": "unfiltered_upload"
+      },
+      {
+        "name": "edit_attachments"
+      },
+      {
+        "name": "delete_attachments"
+      },
+      {
+        "name": "read_others_attachments"
+      }
+    ],
+    "ownerManagedAccess": false
+  },
+  {
+    "name": "Pages",
+    "displayName": "Pages",
+    "uris": [],
+    "scopes": [
+      {
+        "name": "publish_pages"
+      },
+      {
+        "name": "create_pages"
+      },
+      {
+        "name": "edit_pages"
+      },
+      {
+        "name": "delete_pages"
+      },
+      {
+        "name": "edit_published_pages"
+      },
+      {
+        "name": "delete_published_pages"
+      },
+      {
+        "name": "read_others_pages"
+      },
+      {
+        "name": "edit_others_pages"
+      },
+      {
+        "name": "delete_others_pages"
+      },
+      {
+        "name": "read_private_pages"
+      }
+    ],
+    "ownerManagedAccess": false
+  },
+  {
+    "name": "Comments",
+    "displayName": "Comments",
+    "uris": [],
+    "scopes": [
+      {
+        "name": "moderate_comments"
+      },
+      {
+        "name": "moderate_others_posts_comments"
+      },
+      {
+        "name": "moderate_post_comments"
+      },
+      {
+        "name": "moderate_page_comments"
+      }
+    ],
+    "ownerManagedAccess": false
+  },
+  {
+    "name": "Themes",
+    "displayName": "Themes",
+    "uris": [],
+    "scopes": [
+      {
+        "name": "switch_themes"
+      },
+      {
+        "name": "edit_theme_options"
+      },
+      {
+        "name": "edit_themes"
+      },
+      {
+        "name": "delete_themes"
+      },
+      {
+        "name": "install_themes"
+      },
+      {
+        "name": "update_themes"
+      }
+    ],
+    "ownerManagedAccess": false
+  },
+  {
+    "name": "Plugins",
+    "displayName": "Plugins",
+    "uris": [],
+    "scopes": [
+      {
+        "name": "activate_plugins"
+      },
+      {
+        "name": "edit_plugins"
+      },
+      {
+        "name": "install_plugins"
+      },
+      {
+        "name": "update_plugins"
+      },
+      {
+        "name": "delete_plugins"
+      }
+    ],
+    "ownerManagedAccess": false
+  },
+
+  {
+    "name": "Users",
+    "displayName": "Users",
+    "uris": [],
+    "scopes": [
+      {
+        "name": "list_users"
+      },
+      {
+        "name": "switch_users"
+      },
+      {
+        "name": "create_users"
+      },
+      {
+        "name": "edit_users"
+      },
+      {
+        "name": "delete_users"
+      },
+      {
+        "name": "promote_users"
+      },
+      {
+        "name": "remove_users"
+      },
+      {
+        "name": "edit_users_higher_level"
+      },
+      {
+        "name": "delete_users_higher_level"
+      },
+      {
+        "name": "promote_users_higher_level"
+      },
+      {
+        "name": "promote_users_to_higher_level"
+      }
+    ],
+    "ownerManagedAccess": false
+  },
+  {
+    "name": "Roles (WPFront)",
+    "displayName": "Roles (WPFront)",
+    "uris": [],
+    "scopes": [
+      {
+        "name": "list_roles"
+      },
+      {
+        "name": "edit_content_shortcodes"
+      },
+      {
+        "name": "create_posttypes"
+      },
+      {
+        "name": "create_roles"
+      },
+      {
+        "name": "delete_content_shortcodes"
+      },
+      {
+        "name": "edit_posttypes"
+      },
+      {
+        "name": "edit_roles"
+      },
+      {
+        "name": "edit_login_redirects"
+      },
+      {
+        "name": "delete_posttypes"
+      },
+      {
+        "name": "delete_roles"
+      },
+      {
+        "name": "delete_login_redirects"
+      },
+      {
+        "name": "create_taxonomies"
+      },
+      {
+        "name": "edit_role_menus"
+      },
+      {
+        "name": "bulk_edit_roles"
+      },
+      {
+        "name": "edit_taxonomies"
+      },
+      {
+        "name": "edit_nav_menu_permissions"
+      },
+      {
+        "name": "edit_widget_permissions"
+      },
+      {
+        "name": "delete_taxonomies"
+      }
+    ],
+    "ownerManagedAccess": false
+  },
+  {
+    "name": "Tools",
+    "displayName": "Tools",
+    "uris": [],
+    "scopes": [
+      {
+        "name": "import"
+      },
+      {
+        "name": "export"
+      }
+    ],
+    "ownerManagedAccess": false
+  },
+  {
+    "name": "Admin",
+    "displayName": "Admin",
+    "uris": [],
+    "scopes": [
+      {
+        "name": "manage_options"
+      },
+      {
+        "name": "update_core"
+      },
+      {
+        "name": "unfiltered_html"
+      }
+    ],
+    "ownerManagedAccess": false
+  },
+  {
+    "name": "Links",
+    "displayName": "Links",
+    "uris": [],
+    "scopes": [
+      {
+        "name": "manage_links"
+      }
+    ],
+    "ownerManagedAccess": false
+  },
+
+  {
+    "name": "Formularios (Post Type)",
+    "displayName": "Formularios (Post Type)",
+    "uris": [],
+    "scopes": [
+      {
+        "name": "publish_um_forms"
+      },
+      {
+        "name": "edit_um_forms"
+      },
+      {
+        "name": "delete_um_forms"
+      },
+      {
+        "name": "edit_published_um_forms"
+      },
+      {
+        "name": "delete_published_um_forms"
+      },
+      {
+        "name": "edit_others_um_forms"
+      },
+      {
+        "name": "delete_others_um_forms"
+      },
+      {
+        "name": "read_private_um_forms"
+      },
+      {
+        "name": "edit_private_um_forms"
+      },
+      {
+        "name": "delete_private_um_forms"
+      }
+    ],
+    "ownerManagedAccess": false
+  },
+
+  {
+    "name": "Other Capabilities",
+    "displayName": "Other Capabilities",
+    "uris": [],
+    "scopes": [
+      {
+        "name": "edit_posts_role_permissions"
+      },
+      {
+        "name": "read_custom_css"
+      },
+      {
+        "name": "delete_published_custom_css"
+      },
+      {
+        "name": "delete_notes_elementor-pro"
+      },
+      {
+        "name": "wf2fa_activate_2fa_others"
+      },
+      {
+        "name": "manage_capabilities_admin_me..."
+      },
+      {
+        "name": "manage_capabilities_settings"
+      },
+      {
+        "name": "edit_pages_role_permissions"
+      },
+      {
+        "name": "delete_custom_css"
+      },
+      {
+        "name": "delete_others_custom_css"
+      },
+      {
+        "name": "read_notes_elementor-pro"
+      },
+      {
+        "name": "wf2fa_manage_settings"
+      },
+      {
+        "name": "manage_capabilities_frontend_f..."
+      },
+      {
+        "name": "access_server_browser"
+      },
+      {
+        "name": "edit_custom_css"
+      },
+      {
+        "name": "edit_published_custom_css"
+      },
+      {
+        "name": "edit_others_notes_elementor-pro"
+      },
+      {
+        "name": "manage_capabilities_dashboard"
+      },
+      {
+        "name": "manage_capabilities_profile_fea..."
+      },
+      {
+        "name": "manage_capabilities"
+      },
+      {
+        "name": "edit_others_custom_css"
+      },
+      {
+        "name": "manage_database"
+      },
+      {
+        "name": "delete_others_notes_elementor..."
+      },
+      {
+        "name": "manage_capabilities_roles"
+      },
+      {
+        "name": "manage_capabilities_nav_menus"
+      },
+      {
+        "name": "loco_admin"
+      },
+      {
+        "name": "publish_custom_css"
+      },
+      {
+        "name": "create_notes_elementor-pro"
+      },
+      {
+        "name": "read_others_private_notes_ele..."
+      },
+      {
+        "name": "manage_capabilities_editor_feat..."
+      },
+      {
+        "name": "manage_capabilities_user_testing"
+      },
+      {
+        "name": "edit_custom_css"
+      },
+      {
+        "name": "delete_custom_css"
+      },
+      {
+        "name": "edit_notes_elementor-pro"
+      },
+      {
+        "name": "wf2fa_activate_2fa_self"
+      },
+      {
+        "name": "manage_capabilities_admin_feat..."
+      },
+      {
+        "name": "manage_capabilities_backup"
+      }
+    ],
+    "ownerManagedAccess": false
+  }
+]

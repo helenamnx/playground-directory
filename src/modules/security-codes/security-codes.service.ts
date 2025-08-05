@@ -107,11 +107,7 @@ export class SecurityCodesService extends CRUDService<SecurityCode> {
 
       return securityCode;
     } catch (error) {
-      throw new BadRequestCustomResponse({
-        title: 'Error checking security code',
-        detail: 'There was an error checking the security code',
-        key: CustomErrorKeys.ERROR_CHECKING_SECURITY_CODE,
-      });
+      throw error;
     }
   }
 

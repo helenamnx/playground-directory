@@ -32,6 +32,17 @@ export function manageKeyCloakErrors(error: any) {
               : 'Some error without description ocurred',
           key: CustomErrorKeys.KEYCLOAK_ERROR, //TODO: comprobar como hacer las keys para los errores de KeylCloak
         });
+
+      case 400:
+        throw new UnauthorizedCustomResponse({
+          title: errorStatusText,
+          detail: errorMessage
+            ? errorMessage
+            : errorDescription
+              ? errorDescription
+              : 'Some error without description ocurred',
+          key: CustomErrorKeys.KEYCLOAK_ERROR, //TODO: comprobar como hacer las keys para los errores de KeylCloak
+        });
       default:
         //si hay un error no controlado, enviar email al admin, hacer log del error
         throw new Error('Unhandled KeylCloak Error');

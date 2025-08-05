@@ -1,0 +1,342 @@
+[
+  {
+    "_id": "5f7e5d1c-b360-440d-8bb9-4b34979c045a",
+    "name": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "administrator",
+        "es": "administrador"
+      }
+    },
+    "alias": "administrator",
+    "description": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "Administrator role",
+        "es": "Rol de administrador"
+      }
+    },
+    "composite": false,
+    "clientRole": true,
+    "policy": {
+      "name": "administrator-policy",
+      "description": "administrator-policy",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS"
+    },
+    "permission": {
+      "name": "administrator-permissions",
+      "description": "administrator-permissions",
+      "type": "resource",
+      "resources": [
+        "Dashboard",
+        "Posts",
+        "Media",
+        "Pages",
+        "Comments",
+        "Themes",
+        "Plugins",
+        "Users",
+        "Roles (WPFront)",
+        "Tools",
+        "Admin",
+        "Links",
+        "Formularios (Post Type)",
+        "Other Capabilities"
+      ],
+      "decisionStrategy": "AFFIRMATIVE",
+      "logic": "POSITIVE",
+      "scopes": [
+        "read",
+        "edit_dashboard",
+        "publish_posts",
+        "read_others_posts",
+        "manage_categories",
+        "create_posts",
+        "edit_others_posts",
+        "set_posts_status",
+        "edit_posts",
+        "delete_others_posts",
+        "delete_posts",
+        "read_private_posts",
+        "edit_published_posts",
+        "edit_private_posts",
+        "delete_published_posts",
+        "delete_private_posts",
+
+        "upload_files",
+        "delete_others_attachments",
+        "unfiltered_upload",
+        "edit_attachments",
+        "delete_attachments",
+        "read_others_attachments",
+        "edit_others_attachments",
+
+        "publish_pages",
+        "read_others_pages",
+        "create_pages",
+        "edit_others_pages",
+        "edit_pages",
+        "delete_others_pages",
+        "delete_pages",
+        "read_private_pages",
+        "edit_published_pages",
+        "edit_private_pages",
+        "delete_published_pages",
+        "delete_private_pages",
+
+        "moderate_comments",
+        "moderate_others_comments",
+        "moderate_post_comments",
+        "moderate_page_comments",
+
+        "switch_themes",
+        "edit_theme_options",
+        "edit_themes",
+        "delete_themes",
+        "install_themes",
+        "update_themes",
+
+        "activate_plugins",
+        "edit_plugins",
+        "install_plugins",
+        "update_plugins",
+        "delete_plugins",
+
+        "list_users",
+        "switch_users",
+        "create_users",
+        "edit_users",
+        "edit_users_higher_level",
+        "delete_users",
+        "promote_users",
+        "promote_users_higher_level",
+        "remove_users",
+
+        "manage_options",
+        "update_core",
+        "unfiltered_html",
+
+        "manage_links",
+
+        "edit_posts_role_permissions",
+        "read_custom_css",
+        "delete_published_custom_css",
+        "delete_notes_elementor-pro",
+        "wcf2fa_activate_2fa_others",
+        "manage_capabilities_admin_menu",
+        "manage_capabilities_settings",
+        "edit_pages_role_permissions",
+        "delete_custom_css",
+        "delete_others_custom_css",
+        "read_notes_elementor-pro",
+        "wcf2fa_manage_settings",
+        "manage_capabilities_frontend_features",
+        "manage_capabilities_profile_features",
+        "access_server_browser",
+        "edit_custom_css",
+        "edit_published_custom_css",
+        "edit_others_notes_elementor-pro",
+        "manage_capabilities_dashboard",
+        "manage_capabilities_roles",
+        "manage_capabilities_nav_menus",
+        "manage_capabilities",
+        "publish_custom_css",
+        "manage_database",
+        "delete_others_notes_elementor-pro",
+        "manage_capabilities_editor_features",
+        "manage_capabilities_user_testing",
+        "loco_admin",
+        "edit_custom_css",
+        "delete_custom_css",
+        "create_notes_elementor-pro",
+        "read_others_private_notes_ele",
+        "manage_capabilities_admin_features",
+        "manage_capabilities_backup",
+        "edit_notes_elementor-pro"
+      ]
+    }
+  },
+  {
+    "_id": "5fe82c68-0641-4e66-a122-cd81c17bf680",
+    "name": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "examenes",
+        "es": "examenes"
+      }
+    },
+    "alias": "examenes",
+    "description": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "Examenes role",
+        "es": "Rol de examenes"
+      }
+    },
+    "composite": false,
+    "clientRole": true,
+    "policy": {
+      "name": "examenes-policy",
+      "description": "examenes-policy",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS"
+    },
+    "permission": {
+      "name": "examenes-permissions",
+      "description": "examenes-permissions",
+      "type": "resource",
+      "resources": ["Posts", "Pages"],
+      "decisionStrategy": "AFFIRMATIVE",
+      "logic": "POSITIVE",
+      "scopes": ["take_exam", "read_others_posts", "read_others_pages"]
+    }
+  },
+  {
+    "_id": "4cd4da1a-a110-49fb-b18f-b8c7ce37c81b",
+    "name": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "examenesv2",
+        "es": "examenesv2"
+      }
+    },
+    "alias": "examenesv2",
+    "description": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "Examenesv2 role",
+        "es": "Rol de examenesv2"
+      }
+    },
+    "composite": false,
+    "clientRole": true,
+    "policy": {
+      "name": "examenesv2-policy",
+      "description": "examenesv2-policy",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS"
+    },
+
+    "permission": {
+      "name": "examenesv2-permissions",
+      "description": "examenesv2-permissions",
+      "type": "resource",
+      "resources": ["Posts", "Pages"],
+      "decisionStrategy": "AFFIRMATIVE",
+      "logic": "POSITIVE",
+      "scopes": ["read_others_posts", "read_others_pages"]
+    }
+  },
+  {
+    "_id": "5a6a238c-9d33-46a0-a3a8-9b265c3c5eae",
+    "name": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "examenesv3",
+        "es": "examenesv3"
+      }
+    },
+    "alias": "examenesv3",
+    "description": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "Examenesv3 role",
+        "es": "Rol de examenesv3"
+      }
+    },
+    "composite": false,
+    "clientRole": true,
+    "policy": {
+      "name": "examenesv3-policy",
+      "description": "examenesv3-policy",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS"
+    },
+    "permission": {
+      "name": "examenesv3-permissions",
+      "description": "examenesv3-permissions",
+      "type": "resource",
+      "resources": ["Posts", "Pages"],
+      "decisionStrategy": "AFFIRMATIVE",
+      "logic": "POSITIVE",
+      "scopes": ["read_others_posts", "read_others_pages"]
+    }
+  },
+  {
+    "_id": "67a4655f-49b7-4b23-bfad-2081afd3091b",
+    "name": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "no_socio",
+        "es": "no_socio"
+      }
+    },
+    "alias": "no_socio",
+    "description": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "No socio role",
+        "es": "Rol de no socio"
+      }
+    },
+    "composite": false,
+    "clientRole": true,
+    "policy": {
+      "name": "no_socio-policy",
+      "description": "no_socio-policy",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS"
+    },
+    "permission": {
+      "name": "no_socio-permissions",
+      "description": "no_socio-permissions",
+      "type": "resource",
+      "resources": ["Posts", "Pages"],
+      "decisionStrategy": "AFFIRMATIVE",
+      "logic": "POSITIVE",
+      "scopes": ["read_others_posts", "read_others_pages"]
+    }
+  },
+  {
+    "_id": "9bc6581d-7aae-474c-a67a-964d3254451c",
+    "name": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "socio",
+        "es": "socio"
+      }
+    },
+    "alias": "socio",
+    "description": {
+      "type": "languageMapProperty",
+      "languageMap": {
+        "en": "Socio role",
+        "es": "Rol de socio"
+      }
+    },
+    "composite": false,
+    "clientRole": true,
+    "policy": {
+      "name": "socio-policy",
+      "description": "socio-policy",
+      "type": "role",
+      "logic": "POSITIVE",
+      "decisionStrategy": "UNANIMOUS"
+    },
+    "permission": {
+      "name": "socio-permissions",
+      "description": "socio-permissions",
+      "type": "resource",
+      "resources": ["Posts", "Pages"],
+      "decisionStrategy": "AFFIRMATIVE",
+      "logic": "POSITIVE",
+      "scopes": ["read_others_posts", "read_others_pages", "read_private_pages"]
+    }
+  }
+]

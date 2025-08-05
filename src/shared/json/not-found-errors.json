@@ -1,0 +1,7 @@
+{
+  "USER_NOT_FOUND": {
+    "title": "User not found",
+    "key": "USER_NOT_FOUND",
+    "detail": "User not found"
+  }
+}

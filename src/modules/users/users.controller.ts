@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -21,15 +22,38 @@ export class UsersController {
   }
 
   @Get()
-  findAll() {
-    return this.usersService.findAll({ selectOptions: ['-password'] });
+  findAll(@Query('email') email: string) {
+    if (email) {
+      return this.usersService.findOne({
+        filterOptions: { email: email },
+        selectOptions: [
+          '-password',
+          '-history',
+          '-externalIds',
+          '-configuration',
+        ],
+      });
+    }
+    return this.usersService.findAll({
+      selectOptions: [
+        '-password',
+        '-history',
+        '-externalIds',
+        '-configuration',
+      ],
+    });
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne({
       filterOptions: { _id: id },
-      selectOptions: ['-password'],
+      selectOptions: [
+        '-password',
+        '-history',
+        '-externalIds',
+        '-configuration',
+      ],
     });
   }
 
