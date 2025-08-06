@@ -1,26 +1,30 @@
 import { Injectable } from '@nestjs/common';
 import { CreateDocumentVersionDto } from './dto/create-document-version.dto';
 import { UpdateDocumentVersionDto } from './dto/update-document-version.dto';
+import { DocumentVersion } from './schemas/document-version.schema';
+import { CRUDService } from '@/config/database/CRUD/crud.service';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 
 @Injectable()
-export class DocumentVersionsService {
-  create(createDocumentVersionDto: CreateDocumentVersionDto) {
-    return 'This action adds a new documentVersion';
+export class DocumentVersionsService extends CRUDService<DocumentVersion> {
+  constructor(
+    @InjectModel(DocumentVersion.name) 
+    private readonly documentVersionModel: Model<DocumentVersion>,
+  ) {
+    super(documentVersionModel);
   }
 
-  findAll() {
-    return `This action returns all documentVersions`;
+  async createDocumentVersion(dto: CreateDocumentVersionDto): Promise<DocumentVersion> {
+    const newVersion = await super.create(dto);
+    return newVersion;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} documentVersion`;
+  async updateDocumentVersion(id: string, dto: UpdateDocumentVersionDto): Promise<DocumentVersion> {
+    const updatedVersion = await super.update(id, dto);
+    return updatedVersion;
   }
 
-  update(id: number, updateDocumentVersionDto: UpdateDocumentVersionDto) {
-    return `This action updates a #${id} documentVersion`;
-  }
 
-  remove(id: number) {
-    return `This action removes a #${id} documentVersion`;
-  }
+
 }

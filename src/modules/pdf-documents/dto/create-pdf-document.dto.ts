@@ -5,26 +5,22 @@ export class CreatePdfDocumentDto {
     @IsNotEmpty()
     name: string;
 
- 
+
     @IsString()
     @IsNotEmpty()
     @IsUrl()
     contentUrl: string;
 
-   
+
     @IsMongoId()
     @IsNotEmpty()
     parentFolderId: string;
 
-    
+
     @IsMongoId()
     @IsNotEmpty()
     creator: string;
 
-
-    @IsOptional()
-    @IsMongoId()
-    versionSeries?: string;
 
     @IsOptional()
     @IsBoolean()
@@ -40,7 +36,7 @@ export class CreatePdfDocumentDto {
     @IsMongoId({ each: true })
     allowedRoles?: string[];
 
-   
+
     @IsOptional()
     @IsArray()
     @IsMongoId({ each: true })

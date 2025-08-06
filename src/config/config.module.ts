@@ -12,6 +12,7 @@ import JWT from './jwt.config';
 import AUTH from './auth.config';
 import IMAGES from './images.config';
 import PLATFORM from './platform.config';
+import MULTER from './multer.config';
 const environment = process.env.NODE_ENV || 'development';
 
 @Module({
@@ -31,6 +32,7 @@ const environment = process.env.NODE_ENV || 'development';
         AUTH,
         IMAGES,
         PLATFORM,
+        MULTER,
       ],
       validationSchema,
       validationOptions,
@@ -38,4 +40,4 @@ const environment = process.env.NODE_ENV || 'development';
   ],
   providers: [ConfigService],
 })
-export class AppConfigModule {}
+export class AppConfigModule { }

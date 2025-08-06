@@ -1,6 +1,10 @@
+import { DocumentFolder } from '@/modules/document-folders/schemas/document-folder.schema';
+// Eliminar importación de DocumentVersion para evitar dependencia circular
+import { Group } from '@/modules/groups/schemas/group.schema';
+import { UserRole } from '@/modules/user-roles/schemas/user-role.schemas';
+import { User } from '@/modules/users/schemas/user.schema';
 import { Thing } from '@/shared/schemas/thing.schema';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Types } from 'mongoose';
 
 @Schema({ timestamps: true })
 export class PdfDocument extends Thing {
@@ -10,14 +14,11 @@ export class PdfDocument extends Thing {
     @Prop({ required: true })
     contentUrl: string;
 
-    @Prop({ type: Types.ObjectId, ref: 'DocumentFolder', required: true })
-    parentFolder: Types.ObjectId;
+    @Prop({ type: String, ref: 'DocumentFolder', required: true })
+    parentFolder: DocumentFolder;
 
-    @Prop({ type: Types.ObjectId, ref: 'User', required: true })
-    creator: Types.ObjectId;
-
-    @Prop({ type: Types.ObjectId, ref: 'DocumentVersionSeries' })
-    versionSeries: Types.ObjectId;
+    @Prop({ type: String, ref: 'User', required: true })
+    creator: User;
 
     @Prop({ required: true, default: true })
     isLatestVersion: boolean;
@@ -25,11 +26,11 @@ export class PdfDocument extends Thing {
     @Prop({ type: Object, default: {} })
     annotations: object;
 
-    @Prop({ type: [{ type: Types.ObjectId, ref: 'UserRole' }], default: [] })
-    allowedRoles: Types.ObjectId[];
+    @Prop({ type: [{ type: String, ref: 'UserRole' }], default: [] })
+    allowedRoles: UserRole[];
 
-    @Prop({ type: [{ type: Types.ObjectId, ref: 'Group' }], default: [] })
-    allowedGroups: Types.ObjectId[];
+    @Prop({ type: [{ type: String, ref: 'Group' }], default: [] })
+    allowedGroups: Group[];
 
     @Prop({ required: true, unique: true })
     slug: string;

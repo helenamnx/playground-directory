@@ -22,15 +22,15 @@ export class DocumentFoldersService extends CRUDService<DocumentFolder> {
     const { name, parentFolderId } = dto;
     let parentFolder = null;
     if (parentFolderId) {
-      parentFolder = await this.findOne({
+      parentFolder = await super.findOne({
         filterOptions: { _id: parentFolderId },
         triggerError: true,
       });
     }
 
-    // const folderSlug = generateSlug(name);
-    const existingFolder = await this.findOne({
-      filterOptions: { parent: parentFolderId },
+    // Verificamos si ya existe una carpeta con el mismo nombre en la misma ubicación
+    const existingFolder = await super.findOne({
+      filterOptions: { name: name, parent: parentFolderId }, // Verificar nombre Y padre
       triggerError: false,
     });
 
@@ -53,16 +53,12 @@ export class DocumentFoldersService extends CRUDService<DocumentFolder> {
 
   async findDocumentFolder(options: {
     filterOptions?: Record<string, any>;
-    projection?: Record<string, any>;
-    sortOptions?: Record<string, any>;
-    limit?: number;
-    skip?: number;
+
   }): Promise<DocumentFolder[]> {
-    const { filterOptions, projection, sortOptions, limit, skip } = options;
-    return this.documentFolderModel.find(filterOptions, projection)
-      .sort(sortOptions)
-      .limit(limit)
-      .skip(skip)
-      .exec();
+    const { filterOptions } = options;
+    return super.findAll({
+      filterOptions: options || {},
+
+    });
   }
 }
